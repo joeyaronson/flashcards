@@ -18,8 +18,9 @@
         </activity>
         <activity android:name=".newSet" />
         <activity android:name=".newCard" />
-        <activity android:name=".Classes" />
-        <activity android:name=".sets"></activity>
+        <activity android:name=".sets" />
+        <activity android:name=".newClass" />
+        <activity android:name=".cards"></activity>
     </application>
 
 </manifest>

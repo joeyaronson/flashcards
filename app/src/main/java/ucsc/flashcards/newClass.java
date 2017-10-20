@@ -1,26 +1,26 @@
 package ucsc.flashcards;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class newClass extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button newClassButton = (Button) findViewById(R.id.newClass);
+        setContentView(R.layout.activity_new_class);
 
-
-        newClassButton.setOnClickListener(new View.OnClickListener() {
+        Button doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, newClass.class);
-                startActivity(intent);
+                finish();
             }
         });
+
     }
 }
