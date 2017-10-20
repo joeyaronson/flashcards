@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".newSet" />
+        <activity android:name=".newCard" />
+        <activity android:name=".Classes" />
+        <activity android:name=".sets"></activity>
     </application>
 
 </manifest>
