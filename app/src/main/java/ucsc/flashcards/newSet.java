@@ -23,6 +23,6 @@ public class newSet extends AppCompatActivity {
     }
     public void done()
     {
-        Toast.makeText(this,"Set saved",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Set saved.",Toast.LENGTH_LONG).show();
     }
 }

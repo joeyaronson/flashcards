@@ -26,6 +26,6 @@ public class newClass extends AppCompatActivity {
     }
     public void done()
     {
-        Toast.makeText(this,"Class saved",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Class saved.",Toast.LENGTH_LONG).show();
     }
 }
