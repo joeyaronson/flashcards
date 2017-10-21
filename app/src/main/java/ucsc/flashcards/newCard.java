@@ -23,6 +23,6 @@ public class newCard extends AppCompatActivity {
     }
     public void done()
     {
-        Toast.makeText(this,"Card saved.",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Card Saved.",Toast.LENGTH_LONG).show();
     }
 }

@@ -9,18 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                  android:label="Flashcards">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".newSet" />
-        <activity android:name=".newCard" />
-        <activity android:name=".sets" />
-        <activity android:name=".newClass" />
-        <activity android:name=".cards"></activity>
+
+        <activity android:name=".newSet"
+            android:label="Make a New Set"/>
+        <activity android:name=".newCard"
+            android:label="Make a New Card"/>
+        <activity android:name=".sets"
+            android:label="Sets of Flashcards"/>
+        <activity android:name=".newClass"
+            android:label="Make a New Class"/>
+        <activity android:name=".cards"
+            android:label="Flashcards">
+
+        </activity>
     </application>
 
 </manifest>
