@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="classes">
+        <item >Bio 23</item>
+        <item >Chem 1A</item>
+        <item >CMPS 12A</item>
+        <item >CMPE 12</item>
+    </string-array>
+
+    <string-array name="sets">
+        <item >ch1</item>
+        <item >ch2</item>
+        <item >ch3</item>
+        <item >ch4</item>
+    </string-array>
+
+    <string-array name="cards">
+        <item >ionic bond</item>
+        <item >polar bond</item>
+        <item >covalent bond</item>
+    </string-array>
+
+</resources>

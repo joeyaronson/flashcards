@@ -7,7 +7,7 @@
     tools:context="ucsc.flashcards.newClass">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/enterClass"
         android:layout_width="245dp"
         android:layout_height="44dp"
         android:ems="10"
@@ -32,10 +32,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="Button"
+        android:text="@string/done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/enterClass"
         app:layout_constraintVertical_bias="0.033" />
 </android.support.constraint.ConstraintLayout>
