@@ -6,30 +6,36 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-                  android:label="Flashcards">
+        <activity
+            android:name=".splashScreen"
+            android:label="Flashcards">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".newSet"
-            android:label="Make a New Set"/>
-        <activity android:name=".newCard"
-            android:label="Make a New Card"/>
-        <activity android:name=".sets"
-            android:label="Sets of Flashcards"/>
-        <activity android:name=".newClass"
-            android:label="Make a New Class"/>
-        <activity android:name=".cards"
-            android:label="Flashcards">
-
-        </activity>
+        <activity
+            android:name=".newSet"
+            android:label="Make a New Set" />
+        <activity
+            android:name=".newCard"
+            android:label="Make a New Card" />
+        <activity
+            android:name=".sets"
+            android:label="Sets of Flashcards" />
+        <activity
+            android:name=".newClass"
+            android:label="Make a New Class" />
+        <activity
+            android:name=".cards"
+            android:label="Flashcards" />
+        <activity
+            android:name=".MainActivity"
+            android:label="Classes" />
     </application>
 
 </manifest>
