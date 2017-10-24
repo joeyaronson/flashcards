@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class sets extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class sets extends AppCompatActivity {
             }
         });
 
-        Button newSetButton = (Button) findViewById(R.id.newSet);
+        ImageButton newSetButton = (ImageButton) findViewById(R.id.newSet);
         newSetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

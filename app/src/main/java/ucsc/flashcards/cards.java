@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class cards extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class cards extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.cardList);
 
 
-        Button newCardButton = (Button) findViewById(R.id.newCard);
+        ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);
         newCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

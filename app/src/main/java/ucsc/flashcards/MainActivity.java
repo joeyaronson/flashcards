@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import static android.R.attr.id;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        Button newClassButton = (Button) findViewById(R.id.newClass);
+        ImageButton newClassButton = (ImageButton) findViewById(R.id.newClass);
         newClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
