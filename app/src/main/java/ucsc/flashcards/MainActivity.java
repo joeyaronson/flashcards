@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        // test comment
         ListView listView = (ListView) findViewById(R.id.classList);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
