@@ -5,9 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class cards extends AppCompatActivity {
 
@@ -17,6 +21,12 @@ public class cards extends AppCompatActivity {
 
         setContentView(R.layout.activity_cards);
         ListView listView = (ListView) findViewById(R.id.cardList);
+        List<String> cardList= new ArrayList<String>();
+        cardList.add("covalent bond");
+        cardList.add("ionic bond");
+        cardList.add("polar bond");
+        ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
+        listView.setAdapter(aa);
 
 
         ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);

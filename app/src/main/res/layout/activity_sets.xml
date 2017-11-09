@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient1"
     tools:context="ucsc.flashcards.sets">
 
     <ListView
@@ -11,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:entries="@array/sets"
+        android:divider="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -25,8 +26,8 @@
         android:id="@+id/newSet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/addbutton"
-        app:srcCompat="@mipmap/addbutton"
+        android:background="@mipmap/bluebutton"
+        app:srcCompat="@mipmap/bluebutton"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"

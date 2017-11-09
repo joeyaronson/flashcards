@@ -1,9 +1,12 @@
 package ucsc.flashcards;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class newCard extends AppCompatActivity {
@@ -12,7 +15,14 @@ public class newCard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card);
-        Button doneButton = (Button) findViewById(R.id.doneButton);
+
+        //makes text color white when typing
+        EditText et = (EditText) findViewById(R.id.enterFront);
+        et.setTextColor(Color.parseColor("#FFFFFF"));
+        EditText et2 = (EditText) findViewById(R.id.enterBack);
+        et.setTextColor(Color.parseColor("#FFFFFF"));
+
+        ImageButton doneButton = (ImageButton) findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

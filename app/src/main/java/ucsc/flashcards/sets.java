@@ -5,9 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class sets extends AppCompatActivity {
 
@@ -17,6 +21,12 @@ public class sets extends AppCompatActivity {
 
 
         ListView listView = (ListView) findViewById(R.id.setList);
+        List<String> setList= new ArrayList<String>();
+        setList.add("ch1");
+        setList.add("ch2");
+        setList.add("ch3");
+        ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,setList);
+        listView.setAdapter(aa);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
