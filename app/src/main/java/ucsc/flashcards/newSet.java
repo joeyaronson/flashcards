@@ -25,12 +25,22 @@ public class newSet extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 done();
-                finish();
             }
         });
     }
     public void done()
     {
-        Toast.makeText(this,"Set Saved.",Toast.LENGTH_LONG).show();
+        EditText setInput = (EditText)findViewById(R.id.enterSet);
+        //checks if nothing is inputted
+        if(setInput.getText().toString().equals(""))
+        {
+            Toast.makeText(this,"Please enter a set name.",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            //PUT LOGIC TO SAVE TEXT HERE
+            Toast.makeText(this,"Set Saved.",Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 }

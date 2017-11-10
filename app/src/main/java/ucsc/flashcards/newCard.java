@@ -20,19 +20,38 @@ public class newCard extends AppCompatActivity {
         EditText et = (EditText) findViewById(R.id.enterFront);
         et.setTextColor(Color.parseColor("#FFFFFF"));
         EditText et2 = (EditText) findViewById(R.id.enterBack);
-        et.setTextColor(Color.parseColor("#FFFFFF"));
+        et2.setTextColor(Color.parseColor("#FFFFFF"));
 
         ImageButton doneButton = (ImageButton) findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 done();
-                finish();
             }
         });
     }
     public void done()
     {
-        Toast.makeText(this,"Card Saved.",Toast.LENGTH_LONG).show();
+        EditText frontInput = (EditText)findViewById(R.id.enterFront);
+        EditText backInput = (EditText)findViewById(R.id.enterBack);
+        //checks if nothing is inputted
+        if(frontInput.getText().toString().equals("")&& backInput.getText().toString().equals(""))
+        {
+            Toast.makeText(this,"Please enter front and back of card.",Toast.LENGTH_LONG).show();
+        }
+        else if(frontInput.getText().toString().equals(""))
+        {
+            Toast.makeText(this,"Please enter front of card.",Toast.LENGTH_LONG).show();
+        }
+        else if(backInput.getText().toString().equals(""))
+        {
+            Toast.makeText(this,"Please enter back of card.",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            //PUT LOGIC TO SAVE TEXT HERE
+            Toast.makeText(this,"Card Saved.",Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 }

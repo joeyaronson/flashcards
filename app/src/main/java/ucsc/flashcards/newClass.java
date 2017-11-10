@@ -28,12 +28,22 @@ public class newClass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 done();
-                finish();
             }
         });
     }
     public void done()
     {
-        Toast.makeText(this,"Class Saved.",Toast.LENGTH_LONG).show();
+        EditText classInput = (EditText)findViewById(R.id.enterClass);
+        //checks if nothing is inputted
+        if(classInput.getText().toString().equals(""))
+        {
+            Toast.makeText(this,"Please enter a class name.",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            //PUT LOGIC TO SAVE TEXT HERE
+            Toast.makeText(this,"Class Saved.",Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 }
