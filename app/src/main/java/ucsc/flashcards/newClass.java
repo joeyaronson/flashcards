@@ -6,11 +6,17 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.view.Gravity.BOTTOM;
 
 public class newClass extends AppCompatActivity {
 
@@ -37,12 +43,32 @@ public class newClass extends AppCompatActivity {
         //checks if nothing is inputted
         if(classInput.getText().toString().equals(""))
         {
-            Toast.makeText(this,"Please enter a class name.",Toast.LENGTH_LONG).show();
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.error_toast, (ViewGroup) findViewById(R.id.error_toast));
+
+            TextView text = (TextView) layout.findViewById(R.id.text);
+            text.setText("Please enter a class name.");
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
         }
         else
         {
-            //PUT LOGIC TO SAVE TEXT HERE
-            Toast.makeText(this,"Class Saved.",Toast.LENGTH_LONG).show();
+            //TODO PUT LOGIC TO SAVE TEXT HERE
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
+
+            TextView text = (TextView) layout.findViewById(R.id.text);
+            text.setText("Class Saved.");
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setDuration(Toast.LENGTH_LONG);
+
+            toast.setView(layout);
+            toast.show();
             finish();
         }
     }
