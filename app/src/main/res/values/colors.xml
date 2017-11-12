@@ -4,6 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff4081</color>
     <color name="white">#FFFFFF</color>
+    <color name="blue">#3ac5eb</color>
+    <color name="darkBlue">#0079c1</color>
+    <color name="grad1">#FFC69F</color>
+    <color name="grad2">#ED4264</color>
+    <color name="grad3">#AF3350</color>
+
+
 
     <color name="black_overlay">#66000000</color>
 </resources>
