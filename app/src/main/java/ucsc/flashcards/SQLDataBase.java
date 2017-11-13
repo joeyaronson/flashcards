@@ -2,6 +2,7 @@ package ucsc.flashcards;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -23,12 +24,12 @@ public class SQLDataBase extends SQLiteOpenHelper {
 
     // Chapter table column names
     public static final String ChapterID = "CHAPTERID";
-    public static final String ClassMany = "CLASSMANY";
+    //public static final String ClassMany = "CLASSMANY";
     public static final String ChapterName = "CHAPTERNAME";
 
     // Flashcard table column names
     public static final String CardID = "CARDID";
-    public static final String ChapterMany = "CHAPTERMANY";
+    //public static final String ChapterMany = "CHAPTERMANY";
     public static final String FC_Front = "FCFront";
     public static final String FC_Back = "FCBack";
     //public static final String FC_Order = "FCOrder"; // Might not be necessary, if we can swap the IDs
@@ -49,12 +50,11 @@ public class SQLDataBase extends SQLiteOpenHelper {
                 ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ClassID + " INTEGER," +
                 ChapterName + " TEXT," +
-                "FOREIGN KEY (" + ClassID + ") REFERENCES (" +
-                CLASS_TABLE + "(" + ClassID + "))";
+                "FOREIGN KEY (" + ClassID + ") REFERENCES (" + CLASS_TABLE + "(" + ClassID + "))"); // connects the two tables
         // create card table
         db.execSQL("create table " + CARD_TABLE + " (" +
                 CardID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
-                ChapterMany + " INTEGER," +
+                ChapterID + " INTEGER," +
                 FC_Front + " TEXT," +
                 FC_Back + " TEXT," +
                 //FC_Order + "," +
@@ -78,11 +78,11 @@ public class SQLDataBase extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertChapter(String name, int parent_class) {
+    public boolean insertChapter(String name, int parentClassID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(ChapterName, name);
-        contentValues.put(ClassMany, parent_class);
+        contentValues.put(ClassID, parentClassID);
         long result = db.insert(CHAPTER_TABLE, null, contentValues);
         if(result == -1)
             return false;
@@ -91,9 +91,10 @@ public class SQLDataBase extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertCard(String front, String back, ) {
+    public boolean insertCard(String front, String back, int parentChapterID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(ClassID, front);
         contentValues.put(FC_Front, front);
         contentValues.put(FC_Back, back);
         contentValues.put(FC_Diff, 5); // just setting base difficulty to 5
@@ -102,5 +103,24 @@ public class SQLDataBase extends SQLiteOpenHelper {
             return false;
         else
             return true;
+    }
+
+    public Cursor getClasses() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + CLASS_TABLE, null);
+    }
+
+    public Cursor getChapters(int parentClassID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT " + ChapterID + "," + ChapterName +
+                            " FROM " + CHAPTER_TABLE +
+                            " WHERE " + ClassID + " = '" + parentClassID + "'", null);
+    }
+
+    public Cursor getCards(int parentChapterID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT " + FC_Front + "," + FC_Back + "," + FC_Diff +
+                " FROM " + CARD_TABLE +
+                " WHERE name = '" + parentChapterID + "'", null);
     }
 }
