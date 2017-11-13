@@ -32,7 +32,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
     public static final String FC_Front = "FCFront";
     public static final String FC_Back = "FCBack";
     //public static final String FC_Order = "FCOrder"; // Might not be necessary, if we can swap the IDs
-    public static final String FC_Diff = "FCDiff";
+    public static final String FC_Diff = "FCDiff"; // Difficulty of the flashcard
 
     public SQLDataBase(Context context){
         super(context, DATABASE_NAME, null, 1);
@@ -43,25 +43,27 @@ public class SQLDataBase extends SQLiteOpenHelper {
         // create class table
         db.execSQL("create table " + CLASS_TABLE + " (" +
                 ClassID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ClassName + ")");
+                ClassName + " TEXT)");
         // create chapter table
         db.execSQL("create table " + CHAPTER_TABLE + " (" +
                 ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ClassMany + "," +
-                ChapterName + ")");
+                ClassID + " INTEGER," +
+                ChapterName + " TEXT," +
+                "FOREIGN KEY (" + ClassID + ") REFERENCES (" +
+                CLASS_TABLE + "(" + ClassID + "))";
         // create card table
         db.execSQL("create table " + CARD_TABLE + " (" +
                 CardID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
-                ChapterMany + "," +
-                FC_Front + "," +
-                FC_Back + "," +
+                ChapterMany + " INTEGER," +
+                FC_Front + " TEXT," +
+                FC_Back + " TEXT," +
                 //FC_Order + "," +
-                FC_Diff + ")");
+                FC_Diff + " INTEGER)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // MAke this do something, I guess
     }
 
     public boolean insertClass(String name) {
@@ -76,7 +78,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertChapter(String name, String parent_class) {
+    public boolean insertChapter(String name, int parent_class) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(ChapterName, name);
@@ -89,7 +91,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(String front, String back) {
+    public boolean insertCard(String front, String back, ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(FC_Front, front);
