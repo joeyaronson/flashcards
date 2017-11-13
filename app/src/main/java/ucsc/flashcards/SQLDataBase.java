@@ -1,0 +1,104 @@
+package ucsc.flashcards;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by Kohl Grunt on 11/11/2017.
+ */
+
+public class SQLDataBase extends SQLiteOpenHelper {
+    public static final String DATABASE_NAME = "Student.db";
+
+    // There will be 3 tables in this database, set up in a one-to-many configuration
+    public static final String CLASS_TABLE = "class_table";
+    public static final String CHAPTER_TABLE = "chapter_table";
+    public static final String CARD_TABLE = "card_table";
+
+    // Class table column names
+    public static final String ClassID = "CLASSID";
+    public static final String ClassName = "CLASSNAME";
+
+    // Chapter table column names
+    public static final String ChapterID = "CHAPTERID";
+    public static final String ClassMany = "CLASSMANY";
+    public static final String ChapterName = "CHAPTERNAME";
+
+    // Flashcard table column names
+    public static final String CardID = "CARDID";
+    public static final String ChapterMany = "CHAPTERMANY";
+    public static final String FC_Front = "FCFront";
+    public static final String FC_Back = "FCBack";
+    //public static final String FC_Order = "FCOrder"; // Might not be necessary, if we can swap the IDs
+    public static final String FC_Diff = "FCDiff";
+
+    public SQLDataBase(Context context){
+        super(context, DATABASE_NAME, null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // create class table
+        db.execSQL("create table " + CLASS_TABLE + " (" +
+                ClassID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                ClassName + ")");
+        // create chapter table
+        db.execSQL("create table " + CHAPTER_TABLE + " (" +
+                ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                ClassMany + "," +
+                ChapterName + ")");
+        // create card table
+        db.execSQL("create table " + CARD_TABLE + " (" +
+                CardID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
+                ChapterMany + "," +
+                FC_Front + "," +
+                FC_Back + "," +
+                //FC_Order + "," +
+                FC_Diff + ")");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    public boolean insertClass(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ClassName, name);
+        long result = db.insert(CLASS_TABLE, null, contentValues);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+
+
+    public boolean insertChapter(String name, String parent_class) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ChapterName, name);
+        contentValues.put(ClassMany, parent_class);
+        long result = db.insert(CHAPTER_TABLE, null, contentValues);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+
+
+    public boolean insertData(String front, String back) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FC_Front, front);
+        contentValues.put(FC_Back, back);
+        contentValues.put(FC_Diff, 5); // just setting base difficulty to 5
+        long result = db.insert(CARD_TABLE, null, contentValues);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+}
