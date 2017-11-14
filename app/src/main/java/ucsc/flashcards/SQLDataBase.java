@@ -63,9 +63,6 @@ public class SQLDataBase extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // MAke this do something, I guess\
-        db.execSQL("DROP TABLE IF EXISTS " + CLASS_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + CHAPTER_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + CARD_TABLE);
         onCreate(db);
     }
 
@@ -135,5 +132,23 @@ public class SQLDataBase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CLASS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + CHAPTER_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + CARD_TABLE);
+        // create class table
+        db.execSQL("create table " + CLASS_TABLE + " (" +
+                ClassID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                ClassName + " TEXT)");
+        // create chapter table
+        db.execSQL("create table " + CHAPTER_TABLE + " (" +
+                ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                ClassID + " INTEGER," +
+                ChapterName + " TEXT)");//," +
+        //"FOREIGN KEY (" + ClassID + ") REFERENCES (" + CLASS_TABLE + "(" + ClassID + ")))"); // connects the two tables
+        // create card table
+        db.execSQL("create table " + CARD_TABLE + " (" +
+                CardID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                ChapterID + " INTEGER," +
+                FC_Front + " TEXT," +
+                FC_Back + " TEXT," +
+                //FC_Order + "," +
+                FC_Diff + " INTEGER)");
     }
 }
