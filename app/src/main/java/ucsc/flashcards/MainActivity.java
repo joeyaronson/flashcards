@@ -24,25 +24,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        /*PULL FROM SQL HERE*/
         ListView listView = (ListView) findViewById(R.id.classList);
-        //array of classes
         List<String> classList= new ArrayList<String>();
         classList.add("BIO 11");
         classList.add("CMPS 12A");
         classList.add("MATH 23A");
+
+        /* ARRAY ADAPTER */
         ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,classList);
         listView.setAdapter(aa);
+
+        /*ARRAY ONCLICK*/
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
                 public void onItemClick(AdapterView<?> arg0,View arg1, int position, long arg3)
                 {
 
                     Intent n = new Intent(getApplicationContext(), sets.class);
-                    n.putExtra("position", position);
+                    n.putExtra("classPosition", position);
                     startActivity(n);
                 }
             });
 
+        /*NEW CLASS BUTTON*/
         ImageButton newClassButton = (ImageButton) findViewById(R.id.newClass);
         newClassButton.setOnClickListener(new View.OnClickListener() {
             @Override

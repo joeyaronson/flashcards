@@ -26,6 +26,7 @@ public class newSet extends AppCompatActivity {
         EditText et = (EditText) findViewById(R.id.enterSet);
         et.setTextColor(Color.parseColor("#FFFFFF"));
 
+        /*EXITS ACTIVITY WHEN CLICKED*/
         ImageButton doneButton = (ImageButton) findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,8 @@ public class newSet extends AppCompatActivity {
             toast.show();
             //Toast.makeText(this,"Please enter a set name.",Toast.LENGTH_LONG).show();
         }
+
+        /*RUNS IF SOMETHING IS INPUTTED*/
         else
         {
             //PUT LOGIC TO SAVE TEXT HERE

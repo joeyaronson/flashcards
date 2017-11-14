@@ -30,6 +30,7 @@ public class newClass extends AppCompatActivity {
         EditText et = (EditText) findViewById(R.id.enterClass);
         et.setTextColor(Color.parseColor("#FFFFFF"));
 
+        /*EXITS ACTIVITY WHEN CLICKED*/
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +56,8 @@ public class newClass extends AppCompatActivity {
             toast.setView(layout);
             toast.show();
         }
+
+        /*RUNS IF SOMETHING IS INPUTTED*/
         else
         {
             //TODO PUT LOGIC TO SAVE TEXT HERE

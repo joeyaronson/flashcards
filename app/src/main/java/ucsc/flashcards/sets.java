@@ -19,25 +19,33 @@ public class sets extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sets);
 
+        //pulling position of list from previous activity
+        int classPos = getIntent().getExtras().getInt("classPosition");
 
+        /*PULL FROM SQL HERE*/
         ListView listView = (ListView) findViewById(R.id.setList);
         List<String> setList= new ArrayList<String>();
         setList.add("ch1");
         setList.add("ch2");
         setList.add("ch3");
+
+        /* ARRAY ADAPTER */
         ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,setList);
         listView.setAdapter(aa);
+
+        /*ARRAY ONCLICK*/
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
             {
 
                 Intent n = new Intent(getApplicationContext(), cards.class);
-                n.putExtra("position", position);
+                n.putExtra("setPosition", position);
                 startActivity(n);
             }
         });
 
+        /*NEW SET BUTTON*/
         ImageButton newSetButton = (ImageButton) findViewById(R.id.newSet);
         newSetButton.setOnClickListener(new View.OnClickListener() {
             @Override

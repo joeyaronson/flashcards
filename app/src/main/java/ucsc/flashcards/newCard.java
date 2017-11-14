@@ -28,6 +28,7 @@ public class newCard extends AppCompatActivity {
         EditText et2 = (EditText) findViewById(R.id.enterBack);
         et2.setTextColor(Color.parseColor("#FFFFFF"));
 
+        /*EXITS ACTIVITY WHEN CLICKED*/
         ImageButton doneButton = (ImageButton) findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +87,8 @@ public class newCard extends AppCompatActivity {
             toast.show();
             //Toast.makeText(this,"Please enter back of card.",Toast.LENGTH_LONG).show();
         }
+
+        /*RUNS IF SOMETHING IS INPUTTED*/
         else
         {
             //TODO PUT LOGIC TO SAVE TEXT HERE
