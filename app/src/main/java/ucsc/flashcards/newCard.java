@@ -23,7 +23,8 @@ public class newCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card);
         db = new SQLDataBase(this);
-        setID = getIntent().getExtras().getInt("setPostion");
+        setID = getIntent().getExtras().getInt("cardPosition");
+        System.out.println("!!!!!:" + setID);
         //makes text color white when typing
         EditText et = (EditText) findViewById(R.id.enterFront);
         et.setTextColor(Color.parseColor("#FFFFFF"));
@@ -100,7 +101,7 @@ public class newCard extends AppCompatActivity {
             EditText getBack = (EditText)findViewById(R.id.enterBack);
             String backName = getBack.getText().toString();
 
-            boolean isAdded = db.insertCard(frontName,backName,0);//setID);
+            boolean isAdded = db.insertCard(frontName,backName,setID);
 
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));

@@ -25,14 +25,14 @@ public class cards extends AppCompatActivity {
 
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
-        System.out.println(setID);
+        System.out.println("SetID:"+setID);
 
 
         ListView listView = (ListView) findViewById(R.id.cardList);
         final List<String> cardList= new ArrayList<String>();
         final List<Integer> cardIdList= new ArrayList<Integer>();
 
-        Cursor classCurs = db.getCards(0);//setID);
+        Cursor classCurs = db.getCards(setID);
         while(classCurs.moveToNext())
         {
             cardList.add(classCurs.getString(0));
@@ -64,14 +64,14 @@ public class cards extends AppCompatActivity {
 
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
-        System.out.println(setID);
+        System.out.println("SetID:"+setID);
 
 
         ListView listView = (ListView) findViewById(R.id.cardList);
         final List<String> cardList= new ArrayList<String>();
         final List<Integer> cardIdList= new ArrayList<Integer>();
 
-        Cursor classCurs = db.getCards(0);//setID);
+        Cursor classCurs = db.getCards(setID);
         while(classCurs.moveToNext())
         {
             cardList.add(classCurs.getString(0));

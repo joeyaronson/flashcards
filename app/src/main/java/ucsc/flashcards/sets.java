@@ -23,6 +23,7 @@ public class sets extends AppCompatActivity {
 
         //pulling position of list from previous activity
         final int classID = getIntent().getExtras().getInt("classPosition");
+        System.out.println("ClassID:"+classID);
 
 
         ListView listView = (ListView) findViewById(R.id.setList);
@@ -72,6 +73,7 @@ public class sets extends AppCompatActivity {
         super.onResume();
 
         final int classID = getIntent().getExtras().getInt("classPosition");
+        System.out.println("ClassID:"+classID);
         ListView listView = (ListView) findViewById(R.id.setList);
         final List<String> setList = new ArrayList<String>();
         final List<Integer> setIdList = new ArrayList<Integer>();
