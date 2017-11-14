@@ -19,12 +19,12 @@ public class SQLDataBase extends SQLiteOpenHelper {
     public static final String CARD_TABLE = "card_table";
 
     // Class table column names
-    public static final String ClassID = "CLASSID";
+    public static final String ClassID = "CLASSID"; //column 0
     public static final String ClassName = "CLASSNAME";
 
     // Chapter table column names
     public static final String ChapterID = "CHAPTERID";
-    //public static final String ClassMany = "CLASSMANY";
+    //public static final String Class  = "CLASSMANY";
     public static final String ChapterName = "CHAPTERNAME";
 
     // Flashcard table column names
@@ -124,7 +124,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT " + FC_Front + "," + FC_Back + "," + FC_Diff +
                 " FROM " + CARD_TABLE +
-                " WHERE name = '" + parentChapterID + "'", null);
+                " WHERE " + ChapterID + " = '" + parentChapterID + "'", null);
     }
 
     public void ClearDatabase(){
