@@ -101,7 +101,7 @@ public class newCard extends AppCompatActivity {
             EditText getBack = (EditText)findViewById(R.id.enterBack);
             String backName = getBack.getText().toString();
 
-            boolean isAdded = db.insertCard(frontName,backName,setID);
+            boolean isAdded = db.insertCard(frontName,backName,0);//setID);
 
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));

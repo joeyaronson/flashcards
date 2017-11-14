@@ -34,6 +34,7 @@ public class sets extends AppCompatActivity {
         {
             setList.add(classCurs.getString(1));
             setIdList.add(classCurs.getInt(0));
+            System.out.println("\n\n\n\n\ncol0: " + classCurs.getInt(0) + " col1: " + classCurs.getString(1) + "\n\n\n\n\n");
 
         }
 

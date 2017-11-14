@@ -32,7 +32,7 @@ public class cards extends AppCompatActivity {
         final List<String> cardList= new ArrayList<String>();
         final List<Integer> cardIdList= new ArrayList<Integer>();
 
-        Cursor classCurs = db.getCards(setID);
+        Cursor classCurs = db.getCards(0);//setID);
         while(classCurs.moveToNext())
         {
             cardList.add(classCurs.getString(1));
@@ -71,7 +71,7 @@ public class cards extends AppCompatActivity {
         final List<String> cardList= new ArrayList<String>();
         final List<Integer> cardIdList= new ArrayList<Integer>();
 
-        Cursor classCurs = db.getCards(setID);
+        Cursor classCurs = db.getCards(0);//setID);
         while(classCurs.moveToNext())
         {
             cardList.add(classCurs.getString(2));
