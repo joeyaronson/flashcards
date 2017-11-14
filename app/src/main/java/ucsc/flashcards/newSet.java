@@ -59,6 +59,10 @@ public class newSet extends AppCompatActivity {
         else
         {
             //PUT LOGIC TO SAVE TEXT HERE
+
+            EditText getSet = (EditText)findViewById(R.id.enterSet);
+            String setName = getSet.getText().toString();
+
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
 
