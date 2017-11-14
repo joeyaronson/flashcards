@@ -5,7 +5,7 @@ import android.app.Application;
 /**
  * Created by Jerell-PC on 11/14/2017.
  */
-
+/*
 public class MyApplication extends Application{
 }
 
@@ -17,8 +17,9 @@ public static MyApplication getInstance(){
     // Return the instance
     return instance;
 }
-private MyApplication() {
-}
-public void getInstanceofDB(){
-}
+//private MyApplication() {
+//}
+//public void getInstanceofDB(){
+//}
 
+*/
