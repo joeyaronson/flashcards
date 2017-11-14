@@ -68,7 +68,7 @@ public class newClass extends AppCompatActivity {
             EditText getClass = (EditText)findViewById(R.id.enterClass);
             String className = getClass.getText().toString();
 
-            ((MyApplication) getApplication()).getInstaceofDB();
+            ((MyApplication) getApplication()).getInstanceofDB();
 
 
             LayoutInflater inflater = getLayoutInflater();
