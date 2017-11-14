@@ -32,7 +32,6 @@ public class SQLDataBase extends SQLiteOpenHelper {
     //public static final String ChapterMany = "CHAPTERMANY";
     public static final String FC_Front = "FCFront";
     public static final String FC_Back = "FCBack";
-    //public static final String FC_Order = "FCOrder"; // Might not be necessary, if we can swap the IDs
     public static final String FC_Diff = "FCDiff"; // Difficulty of the flashcard
 
     public SQLDataBase(Context context){
@@ -63,7 +62,9 @@ public class SQLDataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // MAke this do something, I guess
+        // MAke this do something, I guess\
+        db.execSQL("DROP TABLE IF EXISTS " + CLASS_TABLE);
+        onCreate(db);
     }
 
     public boolean insertClass(String name) {
