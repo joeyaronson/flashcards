@@ -19,4 +19,6 @@ public static MyApplication getInstance(){
 }
 private MyApplication() {
 }
+public void getInstanceofDB(){
+}
 
