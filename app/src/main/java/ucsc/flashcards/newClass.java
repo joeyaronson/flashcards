@@ -30,6 +30,9 @@ public class newClass extends AppCompatActivity {
         EditText et = (EditText) findViewById(R.id.enterClass);
         et.setTextColor(Color.parseColor("#FFFFFF"));
 
+        // Make new database to write to
+        SQLDataBase db = new SQLDataBase(this);
+
         /*EXITS ACTIVITY WHEN CLICKED*/
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override

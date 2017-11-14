@@ -93,6 +93,7 @@ public class newCard extends AppCompatActivity {
         {
             //TODO PUT LOGIC TO SAVE TEXT HERE
 
+
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
 
