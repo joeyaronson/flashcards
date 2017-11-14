@@ -35,7 +35,7 @@ public class cards extends AppCompatActivity {
         Cursor classCurs = db.getCards(0);//setID);
         while(classCurs.moveToNext())
         {
-            cardList.add(classCurs.getString(1));
+            cardList.add(classCurs.getString(2));
             cardIdList.add(classCurs.getInt(0));
 
         }

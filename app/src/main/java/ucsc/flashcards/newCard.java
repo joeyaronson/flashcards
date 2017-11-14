@@ -93,7 +93,6 @@ public class newCard extends AppCompatActivity {
         /*RUNS IF SOMETHING IS INPUTTED*/
         else
         {
-            //TODO PUT LOGIC TO SAVE TEXT HERE
 
             EditText getFront = (EditText)findViewById(R.id.enterFront);
             String frontName = getFront.getText().toString();
