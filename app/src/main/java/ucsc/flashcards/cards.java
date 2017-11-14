@@ -20,15 +20,22 @@ public class cards extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_cards);
+
+        //pulling position of list from previous activity
+        int pos = getIntent().getExtras().getInt("setPosition");
+
+        /*PULL FROM SQL HERE*/
         ListView listView = (ListView) findViewById(R.id.cardList);
         List<String> cardList= new ArrayList<String>();
         cardList.add("covalent bond");
         cardList.add("ionic bond");
         cardList.add("polar bond");
+
+        /* ARRAY ADAPTER */
         ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
         listView.setAdapter(aa);
 
-
+        /*NEW CARD BUTTON*/
         ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);
         newCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
