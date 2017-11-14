@@ -72,6 +72,7 @@ public class newClass extends AppCompatActivity {
             //((MyApplication) getApplication()).getInstanceofDB();
             boolean isAdded = db.insertClass(className);
 
+
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
 

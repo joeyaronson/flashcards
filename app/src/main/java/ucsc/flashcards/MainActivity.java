@@ -1,6 +1,7 @@
 package ucsc.flashcards;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,20 +19,23 @@ import static android.R.attr.id;
 import static ucsc.flashcards.R.array.classes;
 
 public class MainActivity extends AppCompatActivity {
-
+    SQLDataBase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        db = new SQLDataBase(this);
 
 
         /*PULL FROM SQL HERE*/
-        ListView listView = (ListView) findViewById(R.id.classList);
-        List<String> classList= new ArrayList<String>();
-        classList.add("BIO 11");
-        classList.add("CMPS 12A");
-        classList.add("MATH 23A");
+        final ListView listView = (ListView) findViewById(R.id.classList);
+        final List<String> classList= new ArrayList<String>();
+        Cursor classCurs = db.getClasses();
+
+        while(classCurs.moveToNext())
+        {
+            classList.add(classCurs.getString(1));
+        }
 
         /* ARRAY ADAPTER */
         ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,classList);
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent n = new Intent(getApplicationContext(), sets.class);
                     n.putExtra("classPosition", position);
+                    String atPosition = classList.get(position);
                     startActivity(n);
                 }
             });
@@ -55,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, newClass.class);
+                //intent.putExtra("database", db);
                 startActivity(intent);
             }
         });
