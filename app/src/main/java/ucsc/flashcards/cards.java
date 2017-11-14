@@ -1,6 +1,7 @@
 package ucsc.flashcards;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,22 +15,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class cards extends AppCompatActivity {
-
+    SQLDataBase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_cards);
+        db = new SQLDataBase(this);
 
         //pulling position of list from previous activity
-        int pos = getIntent().getExtras().getInt("setPosition");
+        int setID = getIntent().getExtras().getInt("setPosition");
 
-        /*PULL FROM SQL HERE*/
+
         ListView listView = (ListView) findViewById(R.id.cardList);
-        List<String> cardList= new ArrayList<String>();
-        cardList.add("covalent bond");
-        cardList.add("ionic bond");
-        cardList.add("polar bond");
+        final List<String> cardList= new ArrayList<String>();
+        final List<Integer> idList= new ArrayList<Integer>();
+
+        Cursor classCurs = db.getCards(setID);
+        while(classCurs.moveToNext())
+        {
+            cardList.add(classCurs.getString(1));
+            idList.add(classCurs.getInt(0));
+
+        }
+        /*PULL FROM SQL HERE*/
+
 
         /* ARRAY ADAPTER */
         ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);

@@ -27,14 +27,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         db = new SQLDataBase(this);
 
+        //db.ClearDatabase();
 
         /*PULL FROM SQL HERE*/
         listView = (ListView) findViewById(R.id.classList);
         final List<String> classList= new ArrayList<String>();
+        final List<Integer> classIdList= new ArrayList<Integer>();
+
         Cursor classCurs = db.getClasses();
         while(classCurs.moveToNext())
         {
             classList.add(classCurs.getString(1));
+            classIdList.add(classCurs.getInt(0));
+
         }
 
         /* ARRAY ADAPTER */
@@ -47,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> arg0,View arg1, int position, long arg3)
                 {
 
-                    Intent n = new Intent(getApplicationContext(), sets.class);
-                    n.putExtra("classPosition", position);
-                    String atPosition = classList.get(position);
-                    startActivity(n);
-                }
+                Intent n = new Intent(getApplicationContext(), sets.class);
+                int idPos = classIdList.get(position);
+                n.putExtra("classPosition", idPos);
+                startActivity(n);
+            }
             });
 
         /*NEW CLASS BUTTON*/
@@ -60,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, newClass.class);
-                //intent.putExtra("database", db);
                 startActivity(intent);
 
             }
@@ -76,10 +80,12 @@ public class MainActivity extends AppCompatActivity {
         /*PULL FROM SQL HERE*/
         listView = (ListView) findViewById(R.id.classList);
         final List<String> classList= new ArrayList<String>();
+        final List<Integer> classIdList= new ArrayList<Integer>();
         Cursor classCurs = db.getClasses();
         while(classCurs.moveToNext())
         {
             classList.add(classCurs.getString(1));
+            classIdList.add(classCurs.getInt(0));
         }
 
         /* ARRAY ADAPTER */
@@ -93,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
             {
 
                 Intent n = new Intent(getApplicationContext(), sets.class);
-                n.putExtra("classPosition", position);
-                String atPosition = classList.get(position);
+                int idPos = classIdList.get(position);
+                n.putExtra("classPosition", idPos);
                 startActivity(n);
             }
         });
@@ -111,5 +117,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

@@ -16,12 +16,14 @@ import android.widget.Toast;
 import static android.view.Gravity.BOTTOM;
 
 public class newSet extends AppCompatActivity {
-
+    SQLDataBase db;
+    int classID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_set);
-
+        db = new SQLDataBase(this);
+        classID = getIntent().getExtras().getInt("classPosition");
         //makes text color white when typing
         EditText et = (EditText) findViewById(R.id.enterSet);
         et.setTextColor(Color.parseColor("#FFFFFF"));
@@ -62,6 +64,8 @@ public class newSet extends AppCompatActivity {
 
             EditText getSet = (EditText)findViewById(R.id.enterSet);
             String setName = getSet.getText().toString();
+
+            boolean isAdded = db.insertChapter(setName,classID);
 
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
