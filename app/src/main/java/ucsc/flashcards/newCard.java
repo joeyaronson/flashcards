@@ -16,12 +16,14 @@ import android.widget.Toast;
 import static android.view.Gravity.BOTTOM;
 
 public class newCard extends AppCompatActivity {
-
+    SQLDataBase db;
+    int setID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card);
-
+        db = new SQLDataBase(this);
+        setID = getIntent().getExtras().getInt("setPostion");
         //makes text color white when typing
         EditText et = (EditText) findViewById(R.id.enterFront);
         et.setTextColor(Color.parseColor("#FFFFFF"));
@@ -98,6 +100,8 @@ public class newCard extends AppCompatActivity {
 
             EditText getBack = (EditText)findViewById(R.id.enterBack);
             String backName = getBack.getText().toString();
+
+            boolean isAdded = db.insertCard(frontName,backName,setID);
 
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));

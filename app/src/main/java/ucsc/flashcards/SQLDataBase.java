@@ -96,7 +96,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
     public boolean insertCard(String front, String back, int parentChapterID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ClassID, front);
+        contentValues.put(ChapterID, parentChapterID);
         contentValues.put(FC_Front, front);
         contentValues.put(FC_Back, back);
         contentValues.put(FC_Diff, 5); // just setting base difficulty to 5

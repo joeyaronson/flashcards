@@ -24,18 +24,19 @@ public class cards extends AppCompatActivity {
         db = new SQLDataBase(this);
 
         //pulling position of list from previous activity
-        int setID = getIntent().getExtras().getInt("setPosition");
+        final int setID = getIntent().getExtras().getInt("setPosition");
+        System.out.println(setID);
 
 
         ListView listView = (ListView) findViewById(R.id.cardList);
         final List<String> cardList= new ArrayList<String>();
-        final List<Integer> idList= new ArrayList<Integer>();
+        final List<Integer> cardIdList= new ArrayList<Integer>();
 
         Cursor classCurs = db.getCards(setID);
         while(classCurs.moveToNext())
         {
             cardList.add(classCurs.getString(1));
-            idList.add(classCurs.getInt(0));
+            cardIdList.add(classCurs.getInt(0));
 
         }
         /*PULL FROM SQL HERE*/
@@ -51,8 +52,50 @@ public class cards extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(cards.this, newCard.class);
+                intent.putExtra("cardPosition", setID);
                 startActivity(intent);
             }
         });
+    }
+
+    public void onResume() {
+        super.onResume();
+        db = new SQLDataBase(this);
+
+        //pulling position of list from previous activity
+        final int setID = getIntent().getExtras().getInt("setPosition");
+        System.out.println(setID);
+
+
+        ListView listView = (ListView) findViewById(R.id.cardList);
+        final List<String> cardList= new ArrayList<String>();
+        final List<Integer> cardIdList= new ArrayList<Integer>();
+
+        Cursor classCurs = db.getCards(setID);
+        while(classCurs.moveToNext())
+        {
+            cardList.add(classCurs.getString(2));
+            cardIdList.add(classCurs.getInt(0));
+
+        }
+        /*PULL FROM SQL HERE*/
+
+
+        /* ARRAY ADAPTER */
+        ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
+        listView.setAdapter(aa);
+
+        /*NEW CARD BUTTON*/
+        ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);
+        newCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(cards.this, newCard.class);
+                intent.putExtra("cardPosition", setID);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

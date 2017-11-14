@@ -64,7 +64,6 @@ public class newClass extends AppCompatActivity {
         /*RUNS IF SOMETHING IS INPUTTED*/
         else
         {
-            //TODO PUT LOGIC TO SAVE TEXT HERE
 
             EditText getClass = (EditText)findViewById(R.id.enterClass);
             String className = getClass.getText().toString();
