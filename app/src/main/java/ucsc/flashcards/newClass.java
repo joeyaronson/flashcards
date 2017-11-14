@@ -68,6 +68,8 @@ public class newClass extends AppCompatActivity {
             EditText getClass = (EditText)findViewById(R.id.enterClass);
             String className = getClass.getText().toString();
 
+            ((MyApplication) getApplication()).getInstaceofDB();
+
 
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
