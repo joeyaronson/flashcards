@@ -19,6 +19,7 @@ import android.widget.Toast;
 import static android.view.Gravity.BOTTOM;
 
 public class newClass extends AppCompatActivity {
+    SQLDataBase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class newClass extends AppCompatActivity {
         et.setTextColor(Color.parseColor("#FFFFFF"));
 
         // Make new database to write to
-        SQLDataBase db = new SQLDataBase(this);
+        db = new SQLDataBase(this);
 
         /*EXITS ACTIVITY WHEN CLICKED*/
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +69,8 @@ public class newClass extends AppCompatActivity {
             EditText getClass = (EditText)findViewById(R.id.enterClass);
             String className = getClass.getText().toString();
 
-            ((MyApplication) getApplication()).getInstanceofDB();
-
+            //((MyApplication) getApplication()).getInstanceofDB();
+            boolean isAdded = db.insertClass(className);
 
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
