@@ -48,11 +48,11 @@ public class SQLDataBase extends SQLiteOpenHelper {
         db.execSQL("create table " + CHAPTER_TABLE + " (" +
                 ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ClassID + " INTEGER," +
-                ChapterName + " TEXT," +
-                "FOREIGN KEY (" + ClassID + ") REFERENCES (" + CLASS_TABLE + "(" + ClassID + "))"); // connects the two tables
+                ChapterName + " TEXT)");//," +
+                //"FOREIGN KEY (" + ClassID + ") REFERENCES (" + CLASS_TABLE + "(" + ClassID + ")))"); // connects the two tables
         // create card table
         db.execSQL("create table " + CARD_TABLE + " (" +
-                CardID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
+                CardID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ChapterID + " INTEGER," +
                 FC_Front + " TEXT," +
                 FC_Back + " TEXT," +
@@ -72,10 +72,11 @@ public class SQLDataBase extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ClassName, name);
         long result = db.insert(CLASS_TABLE, null, contentValues);
-        if(result == -1)
+        if(result == -1){
             return false;
-        else
+        } else {
             return true;
+        }
     }
 
 
@@ -85,10 +86,11 @@ public class SQLDataBase extends SQLiteOpenHelper {
         contentValues.put(ChapterName, name);
         contentValues.put(ClassID, parentClassID);
         long result = db.insert(CHAPTER_TABLE, null, contentValues);
-        if(result == -1)
+        if(result == -1){
             return false;
-        else
+        } else {
             return true;
+        }
     }
 
 
@@ -100,10 +102,11 @@ public class SQLDataBase extends SQLiteOpenHelper {
         contentValues.put(FC_Back, back);
         contentValues.put(FC_Diff, 5); // just setting base difficulty to 5
         long result = db.insert(CARD_TABLE, null, contentValues);
-        if(result == -1)
+        if(result == -1){
             return false;
-        else
+        } else {
             return true;
+        }
     }
 
     public Cursor getClasses() {
