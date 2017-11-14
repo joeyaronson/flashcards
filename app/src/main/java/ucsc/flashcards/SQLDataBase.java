@@ -64,6 +64,8 @@ public class SQLDataBase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // MAke this do something, I guess\
         db.execSQL("DROP TABLE IF EXISTS " + CLASS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CHAPTER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CARD_TABLE);
         onCreate(db);
     }
 
@@ -126,5 +128,12 @@ public class SQLDataBase extends SQLiteOpenHelper {
         return db.rawQuery("SELECT " + FC_Front + "," + FC_Back + "," + FC_Diff +
                 " FROM " + CARD_TABLE +
                 " WHERE name = '" + parentChapterID + "'", null);
+    }
+
+    public void ClearDatabase(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + CLASS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CHAPTER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CARD_TABLE);
     }
 }
