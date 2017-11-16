@@ -11,7 +11,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class SQLDataBase extends SQLiteOpenHelper {
+
+    // Singleton Implementation variables
+    private static SQLDataBase sInstance;
+
     public static final String DATABASE_NAME = "Student.db";
+    public static final String DATABASE_TABLE = "table_name";
 
     // There will be 3 tables in this database, set up in a one-to-many configuration
     public static final String CLASS_TABLE = "class_table";
@@ -34,7 +39,9 @@ public class SQLDataBase extends SQLiteOpenHelper {
     public static final String FC_Back = "FCBack";
     public static final String FC_Diff = "FCDiff"; // Difficulty of the flashcard
 
-    public SQLDataBase(Context context){
+
+
+    public SQLDataBase(Context context){ // is this supposed to be public?
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -58,6 +65,14 @@ public class SQLDataBase extends SQLiteOpenHelper {
                 FC_Back + " TEXT," +
                 //FC_Order + "," +
                 FC_Diff + " INTEGER)");
+    }
+
+    // Singleton Implementation
+    public static synchronized SQLDataBase getInstance(Context context){
+        if(sInstance == null){
+            sInstance = new SQLDataBase(context.getApplicationContext());
+        }
+        return sInstance;
     }
 
     @Override

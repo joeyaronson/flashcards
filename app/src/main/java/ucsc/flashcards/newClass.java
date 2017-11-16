@@ -70,7 +70,7 @@ public class newClass extends AppCompatActivity {
             EditText getClass = (EditText)findViewById(R.id.enterClass);
             String className = getClass.getText().toString();
 
-            //((Singleton) getApplication()).getInstanceofDB();
+            // ((Singleton) getApplication()).getInstanceofDB();
             boolean isAdded = db.insertClass(className);
 
             LayoutInflater inflater = getLayoutInflater();
