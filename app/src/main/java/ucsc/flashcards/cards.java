@@ -39,21 +39,36 @@ public class cards extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.cardList);
         final List<String> cardList= new ArrayList<String>();
         final List<Integer> cardIdList= new ArrayList<Integer>();
+        final List<String> cardBack = new ArrayList<String>();
 
         Cursor classCurs = db.getCards(setID);
         while(classCurs.moveToNext())
         {
             isEmpty = false;
             cardList.add(classCurs.getString(0));
+            cardBack.add(classCurs.getString(1));
             cardIdList.add(classCurs.getInt(0));
 
         }
-        /*PULL FROM SQL HERE*/
+
 
 
         /* ARRAY ADAPTER */
         ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
         listView.setAdapter(aa);
+
+        /*IF ARRAY IS CLICKED*/
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
+            {
+
+                Intent n = new Intent(getApplicationContext(), CardView.class);
+                String back = cardBack.get(position);
+                n.putExtra("cardPosition", back);
+                startActivity(n);
+            }
+        });
 
         /*NEW CARD BUTTON*/
         ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);
@@ -79,6 +94,8 @@ public class cards extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.cardList);
         final List<String> cardList= new ArrayList<String>();
         final List<Integer> cardIdList= new ArrayList<Integer>();
+        final List<String> cardBack = new ArrayList<String>();
+
         //DISPLAYS MESSAGE IF NO CLASSES
         TextView noSet = (TextView)findViewById(R.id.noCards);
         if(!isEmpty)
@@ -91,10 +108,23 @@ public class cards extends AppCompatActivity {
         {
             isEmpty = false;
             cardList.add(classCurs.getString(0));
+            cardBack.add(classCurs.getString(1));
             cardIdList.add(classCurs.getInt(0));
 
         }
-        /*PULL FROM SQL HERE*/
+
+         /*IF ARRAY IS CLICKED*/
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
+            {
+
+                Intent n = new Intent(getApplicationContext(), CardView.class);
+                String back = cardBack.get(position);
+                n.putExtra("cardPosition", back);
+                startActivity(n);
+            }
+        });
 
 
         /* ARRAY ADAPTER */
