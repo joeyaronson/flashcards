@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +22,22 @@ import static ucsc.flashcards.R.array.classes;
 public class MainActivity extends AppCompatActivity {
     SQLDataBase db;
     ListView listView;
+    boolean isEmpty = true;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = new SQLDataBase(this);
 
+
+        //DISPLAYS MESSAGE IF NO CLASSES
+        TextView noClass = (TextView)findViewById(R.id.noClasses);
+        if(!isEmpty)
+        {
+            noClass.setText("");
+        }
+
+        //CLEARS DATABASE
         //db.ClearDatabase();
 
         /*PULL FROM SQL HERE*/
@@ -37,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor classCurs = db.getClasses();
         while(classCurs.moveToNext())
         {
+            isEmpty = false;
             classList.add(classCurs.getString(1));
             classIdList.add(classCurs.getInt(0));
 
@@ -65,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, newClass.class);
+                isEmpty = false;
                 startActivity(intent);
 
             }
@@ -81,9 +94,17 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.classList);
         final List<String> classList= new ArrayList<String>();
         final List<Integer> classIdList= new ArrayList<Integer>();
+
+        //Message if no classes
+        TextView noClass = (TextView)findViewById(R.id.noClasses);
+        if(!isEmpty)
+        {
+            noClass.setText("");
+        }
         Cursor classCurs = db.getClasses();
         while(classCurs.moveToNext())
         {
+            isEmpty = false;
             classList.add(classCurs.getString(1));
             classIdList.add(classCurs.getInt(0));
         }
@@ -111,12 +132,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, newClass.class);
-                //intent.putExtra("database", db);
+                isEmpty = false;
                 startActivity(intent);
 
             }
         });
     }
+
+
 
 
 

@@ -10,12 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class cards extends AppCompatActivity {
     SQLDataBase db;
+    boolean isEmpty = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,13 @@ public class cards extends AppCompatActivity {
 
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
-        System.out.println("SetID:"+setID);
+
+        //DISPLAYS MESSAGE IF NO CLASSES
+        TextView noSet = (TextView)findViewById(R.id.noCards);
+        if(!isEmpty)
+        {
+            noSet.setText("");
+        }
 
 
         ListView listView = (ListView) findViewById(R.id.cardList);
@@ -35,6 +43,7 @@ public class cards extends AppCompatActivity {
         Cursor classCurs = db.getCards(setID);
         while(classCurs.moveToNext())
         {
+            isEmpty = false;
             cardList.add(classCurs.getString(0));
             cardIdList.add(classCurs.getInt(0));
 
@@ -53,6 +62,7 @@ public class cards extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(cards.this, newCard.class);
                 intent.putExtra("cardPosition", setID);
+                isEmpty = false;
                 startActivity(intent);
             }
         });
@@ -64,16 +74,22 @@ public class cards extends AppCompatActivity {
 
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
-        System.out.println("SetID:"+setID);
 
 
         ListView listView = (ListView) findViewById(R.id.cardList);
         final List<String> cardList= new ArrayList<String>();
         final List<Integer> cardIdList= new ArrayList<Integer>();
+        //DISPLAYS MESSAGE IF NO CLASSES
+        TextView noSet = (TextView)findViewById(R.id.noCards);
+        if(!isEmpty)
+        {
+            noSet.setText("");
+        }
 
         Cursor classCurs = db.getCards(setID);
         while(classCurs.moveToNext())
         {
+            isEmpty = false;
             cardList.add(classCurs.getString(0));
             cardIdList.add(classCurs.getInt(0));
 
@@ -90,6 +106,7 @@ public class cards extends AppCompatActivity {
         newCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isEmpty = false;
                 Intent intent = new Intent(cards.this, newCard.class);
                 intent.putExtra("cardPosition", setID);
                 startActivity(intent);

@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import static android.view.Gravity.BOTTOM;
 
 public class newClass extends AppCompatActivity {
@@ -71,10 +73,8 @@ public class newClass extends AppCompatActivity {
             //((Singleton) getApplication()).getInstanceofDB();
             boolean isAdded = db.insertClass(className);
 
-
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.save_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
-
             TextView text = (TextView) layout.findViewById(R.id.text);
             text.setText("Class Saved.");
             Toast toast = new Toast(getApplicationContext());

@@ -10,12 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class sets extends AppCompatActivity {
     SQLDataBase db;
+    boolean isEmpty = true;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sets);
@@ -23,7 +25,13 @@ public class sets extends AppCompatActivity {
 
         //pulling position of list from previous activity
         final int classID = getIntent().getExtras().getInt("classPosition");
-        System.out.println("ClassID:"+classID);
+
+        //DISPLAYS MESSAGE IF NO CLASSES
+        TextView noSet = (TextView)findViewById(R.id.noSets);
+        if(!isEmpty)
+        {
+            noSet.setText("");
+        }
 
 
         ListView listView = (ListView) findViewById(R.id.setList);
@@ -33,9 +41,9 @@ public class sets extends AppCompatActivity {
         Cursor classCurs = db.getChapters(classID);
         while(classCurs.moveToNext())
         {
+            isEmpty = false;
             setList.add(classCurs.getString(1));
             setIdList.add(classCurs.getInt(0));
-            System.out.println("\n\n\n\n\ncol0: " + classCurs.getInt(0) + " col1: " + classCurs.getString(1) + "\n\n\n\n\n");
 
         }
 
@@ -62,7 +70,7 @@ public class sets extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(sets.this, newSet.class);
-
+                isEmpty = false;
                 intent.putExtra("classPosition", classID);
                 startActivity(intent);
             }
@@ -78,8 +86,16 @@ public class sets extends AppCompatActivity {
         final List<String> setList = new ArrayList<String>();
         final List<Integer> setIdList = new ArrayList<Integer>();
 
+        //DISPLAYS MESSAGE IF NO CLASSES
+        TextView noSet = (TextView)findViewById(R.id.noSets);
+        if(!isEmpty)
+        {
+            noSet.setText("");
+        }
+
         Cursor classCurs = db.getChapters(classID);
         while (classCurs.moveToNext()) {
+            isEmpty = false;
             setList.add(classCurs.getString(1));
             setIdList.add(classCurs.getInt(0));
 
@@ -106,6 +122,7 @@ public class sets extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(sets.this, newSet.class);
+                isEmpty = false;
                 intent.putExtra("classPosition", classID);
                 startActivity(intent);
             }
