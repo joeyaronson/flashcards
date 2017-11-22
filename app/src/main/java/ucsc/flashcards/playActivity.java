@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class playActivity extends AppCompatActivity {
 
     public boolean isFront = true;
+    public boolean setDone = false;
     public int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +38,74 @@ public class playActivity extends AppCompatActivity {
                 }
             }
         });
-        ImageButton nextButton = (ImageButton) findViewById(R.id.yesButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+
+        /*I KNOW THIS BUTTON*/
+        ImageButton yesButton = (ImageButton) findViewById(R.id.yesButton);
+        yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(i < frontList.size()-1)
+                if(!setDone)
                 {
-                    i++;
-                    card.setText(frontList.get(i));
+                    if(i < frontList.size()-1)
+                    {
+                        frontList.remove(i);
+                        backList.remove(i);
+                        if(i+1 <  frontList.size()-1)
+                        {
+                            i++;
+                        }
+                        else
+                        {
+                            i = 0;
+                        }
+
+                        if(frontList.size() > 0)
+                        {
+                            card.setText(frontList.get(i));
+                        }
+                        else
+                        {
+                            card.setText("Contrats! You have completed this set!");
+                            setDone = true;
+                        }
+
+                    }
+                    else
+                    {
+                        frontList.remove(i);
+                        backList.remove(i);
+                        i = 0;
+                        if(frontList.size() > 0)
+                        {
+                            card.setText(frontList.get(i));
+                        }
+                        else
+                        {
+                            card.setText("Congrats! You have completed this set!");
+                            setDone = true;
+                        }
+                    }
                 }
-                else
+            }
+        });
+
+        /*I DO NOT KNOW THIS BUTTON*/
+        ImageButton noButton = (ImageButton) findViewById(R.id.noButton);
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!setDone)
                 {
-                    i = 0;
-                    card.setText(frontList.get(i));
+                    if(i < frontList.size()-1)
+                    {
+                        i++;
+                        card.setText(frontList.get(i));
+                    }
+                    else
+                    {
+                        i = 0;
+                        card.setText(frontList.get(i));
+                    }
                 }
             }
         });
