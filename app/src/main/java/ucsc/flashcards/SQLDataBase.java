@@ -151,8 +151,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
         db.execSQL("create table " + CLASS_TABLE + " (" +
                 ClassID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ClassName + " TEXT)");
-        // create chapter table
-        db.execSQL("create table " + CHAPTER_TABLE + " (" +
+db.execSQL("create table " + CHAPTER_TABLE + " (" +
                 ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ClassID + " INTEGER," +
                 ChapterName + " TEXT)");//," +

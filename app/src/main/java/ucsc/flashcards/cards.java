@@ -4,16 +4,22 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.Gravity.BOTTOM;
 
 public class cards extends AppCompatActivity {
     SQLDataBase db;
@@ -37,9 +43,9 @@ public class cards extends AppCompatActivity {
 
 
         ListView listView = (ListView) findViewById(R.id.cardList);
-        final List<String> cardList= new ArrayList<String>();
-        final List<Integer> cardIdList= new ArrayList<Integer>();
-        final List<String> cardBack = new ArrayList<String>();
+        final ArrayList<String> cardList= new ArrayList<String>();
+        final ArrayList<Integer> cardIdList= new ArrayList<Integer>();
+        final ArrayList<String> cardBack = new ArrayList<String>();
 
         Cursor classCurs = db.getCards(setID);
         while(classCurs.moveToNext())
@@ -81,6 +87,38 @@ public class cards extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        /*PLAY BUTTON*/
+        ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isEmpty)
+                {
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.error_toast, (ViewGroup) findViewById(R.id.error_toast));
+
+                    TextView text = (TextView) layout.findViewById(R.id.text);
+                    text.setText("There are no cards in this set.");
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(layout);
+                    toast.show();
+
+                }
+                else
+                {
+                    Intent intent = new Intent(cards.this, playActivity.class);
+
+                    intent.putStringArrayListExtra("frontArray", cardList);
+                    intent.putStringArrayListExtra("backArray", cardBack);
+                    startActivity(intent);
+                }
+
+            }
+        });
     }
 
     public void onResume() {
@@ -92,9 +130,9 @@ public class cards extends AppCompatActivity {
 
 
         ListView listView = (ListView) findViewById(R.id.cardList);
-        final List<String> cardList= new ArrayList<String>();
-        final List<Integer> cardIdList= new ArrayList<Integer>();
-        final List<String> cardBack = new ArrayList<String>();
+        final ArrayList<String> cardList= new ArrayList<String>();
+        final ArrayList<Integer> cardIdList= new ArrayList<Integer>();
+        final ArrayList<String> cardBack = new ArrayList<String>();
 
         //DISPLAYS MESSAGE IF NO CLASSES
         TextView noSet = (TextView)findViewById(R.id.noCards);
@@ -143,6 +181,37 @@ public class cards extends AppCompatActivity {
             }
         });
 
+        /*PLAY BUTTON*/
+        ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isEmpty)
+                {
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.error_toast, (ViewGroup) findViewById(R.id.error_toast));
+
+                    TextView text = (TextView) layout.findViewById(R.id.text);
+                    text.setText("There are no cards in this set.");
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(layout);
+                    toast.show();
+
+                }
+                else
+                {
+                    Intent intent = new Intent(cards.this, playActivity.class);
+
+                    intent.putStringArrayListExtra("frontArray", cardList);
+                    intent.putStringArrayListExtra("backArray", cardBack);
+                    startActivity(intent);
+                }
+
+            }
+        });
 
     }
 }
