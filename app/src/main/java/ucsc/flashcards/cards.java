@@ -24,6 +24,8 @@ import static android.view.Gravity.BOTTOM;
 public class cards extends AppCompatActivity {
     SQLDataBase db;
     boolean isEmpty = true;
+    boolean longPress = false;
+    boolean deleteMode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class cards extends AppCompatActivity {
 
 
         /* ARRAY ADAPTER */
-        ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
+        final ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
         listView.setAdapter(aa);
 
         /*IF ARRAY IS CLICKED*/
@@ -68,11 +70,77 @@ public class cards extends AppCompatActivity {
         {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
             {
+                System.out.println("deleteMode: " + deleteMode);
+                if(!deleteMode)
+                {
+                    Intent n = new Intent(getApplicationContext(), CardView.class);
+                    String back = cardBack.get(position);
+                    n.putExtra("cardPosition", back);
+                    startActivity(n);
+                }
+                else
+                {
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.error_toast, (ViewGroup) findViewById(R.id.error_toast));
 
-                Intent n = new Intent(getApplicationContext(), CardView.class);
-                String back = cardBack.get(position);
-                n.putExtra("cardPosition", back);
-                startActivity(n);
+                    TextView text = (TextView) layout.findViewById(R.id.text);
+
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(layout);
+                    text.setText("Test");
+
+                    cardList.remove(position);
+                    aa.notifyDataSetChanged();
+                }
+            }
+        });
+/*
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3)
+            {
+
+                cardList.remove(position);
+                aa.notifyDataSetChanged();
+
+                longPress = true;
+                return false;
+            }
+        });
+*/
+        /*DELETE BUTTON*/
+
+        final Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.delete_toast, (ViewGroup) findViewById(R.id.delete_toast));
+
+                TextView text = (TextView) layout.findViewById(R.id.text);
+
+
+                Toast toast = new Toast(getApplicationContext());
+                toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+
+                if(deleteMode)
+                {
+                    text.setText("Delete Mode Off");
+                    deleteMode = false;
+                }
+                else
+                {
+                    text.setText("Delete Mode On");
+                    deleteMode = true;
+                }
+                toast.show();
+
+
             }
         });
 
@@ -151,23 +219,77 @@ public class cards extends AppCompatActivity {
 
         }
 
+        /* ARRAY ADAPTER */
+        final ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
+        listView.setAdapter(aa);
+
          /*IF ARRAY IS CLICKED*/
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
             {
+                System.out.println("deleteMode: " + deleteMode);
+                if(!deleteMode)
+                {
+                    Intent n = new Intent(getApplicationContext(), CardView.class);
+                    String back = cardBack.get(position);
+                    n.putExtra("cardPosition", back);
+                    startActivity(n);
+                }
+                else
+                {
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.error_toast, (ViewGroup) findViewById(R.id.error_toast));
 
-                Intent n = new Intent(getApplicationContext(), CardView.class);
-                String back = cardBack.get(position);
-                n.putExtra("cardPosition", back);
-                startActivity(n);
+                    TextView text = (TextView) layout.findViewById(R.id.text);
+
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(layout);
+                    text.setText("Test");
+
+                    cardList.remove(position);
+                    aa.notifyDataSetChanged();
+                }
             }
         });
 
 
-        /* ARRAY ADAPTER */
-        ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
-        listView.setAdapter(aa);
+
+
+        /*DELETE BUTTON*/
+        final Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.delete_toast, (ViewGroup) findViewById(R.id.delete_toast));
+
+                TextView text = (TextView) layout.findViewById(R.id.text);
+
+
+                Toast toast = new Toast(getApplicationContext());
+                toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+
+                if(deleteMode)
+                {
+                    text.setText("Delete Mode Off");
+                    deleteMode = false;
+                }
+                else
+                {
+                    text.setText("Delete Mode On");
+                    deleteMode = true;
+                }
+                toast.show();
+
+
+            }
+        });
 
         /*NEW CARD BUTTON*/
         ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);
