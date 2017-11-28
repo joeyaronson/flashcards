@@ -81,6 +81,7 @@ public class cards extends AppCompatActivity {
                 }
                 else
                 {
+                    db.deleteCard(cardIdList.get(position));
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }
@@ -215,6 +216,7 @@ public class cards extends AppCompatActivity {
                 }
                 else
                 {
+                    db.deleteCard(cardIdList.get(position));
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }

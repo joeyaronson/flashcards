@@ -55,13 +55,13 @@ public class SQLDataBase extends SQLiteOpenHelper {
         db.execSQL("create table " + CHAPTER_TABLE + " (" +
                 ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ClassMany + " INTEGER," +
-                "FOREIGN KEY (" + ClassMany + ") REFERENCES " + CLASS_TABLE + " (" + ClassID + ")" + // connects the two tables
+                //"FOREIGN KEY (" + ClassMany + ") REFERENCES " + CLASS_TABLE + " (" + ClassID + ")" + // connects the two tables
                 ChapterName + " TEXT)");  // create card table
         db.execSQL("create table " + CARD_TABLE + " (" +
                 CardID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ChapterMany + " INTEGER," +
-                "FOREIGN KEY (" + ChapterMany + ") REFERENCES " + CHAPTER_TABLE + " (" + ChapterID + ")" + // connects the two tables
-                "ON DELETE SET NULL," +
+                //"FOREIGN KEY (" + ChapterMany + ") REFERENCES " + CHAPTER_TABLE + " (" + ChapterID + ")" + // connects the two tables
+                //"ON DELETE SET NULL," +
                 FC_Front + " TEXT," +
                 FC_Back + " TEXT," +
                 //FC_Order + "," +
@@ -161,17 +161,17 @@ public class SQLDataBase extends SQLiteOpenHelper {
 
     public void deleteClass(int classID){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM" + CLASS_TABLE + "WHERE" + ClassID + " = " + classID);
+        db.execSQL("DELETE FROM " + CLASS_TABLE + " WHERE " + ClassID + " = " + classID);
     }
 
     public void deleteChapter(int chapterID){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM" + CHAPTER_TABLE + "WHERE" + ChapterID + " = " + chapterID);
+        db.execSQL("DELETE FROM " + CHAPTER_TABLE + " WHERE " + ChapterID + " = " + chapterID);
     }
 
     public void deleteCard(int cardID){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM" + CARD_TABLE + "WHERE" + CardID + " = " + cardID);
+        db.execSQL("DELETE FROM " + CARD_TABLE + " WHERE " + CardID + " = " + cardID);
     }
 
 

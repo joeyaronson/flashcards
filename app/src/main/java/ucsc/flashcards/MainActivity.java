@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //CLEARS DATABASE
-        //db.ClearDatabase();
+        db.ClearDatabase();
 
         /*PULL FROM SQL HERE*/
         listView = (ListView) findViewById(R.id.classList);
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    db.deleteClass(classIdList.get(position));
                     classList.remove(position);
                     aa.notifyDataSetChanged();
                     if(classList.isEmpty())
@@ -181,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    db.deleteClass(classIdList.get(position));
                     classList.remove(position);
                     aa.notifyDataSetChanged();
                 }
