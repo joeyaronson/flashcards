@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient1"
+    tools:context="ucsc.flashcards.helpActivity">
+
+    <TextView
+        android:id="@+id/noSets"
+        android:layout_width="334dp"
+        android:layout_height="172dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text='On the main screen press the "+" button to make a new class.
+        \nClasses are like folders in which you can store sets of cards.
+        \nFor example you could make a class: "CMPS 121"
+        \nClick the delete button to toggle "Delete Mode"
+        \nWhen "Delete Mode" is on clicking on an item will delete it.
+        \nClicking on the created class will take you inside the class.
+        \nInside you can find and create your sets.
+        \nAn example of a set would be Midterm 1
+        \nClicking on a set will take you inside the set
+        \nHere '
+
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
+        tools:layout_editor_absoluteX="42dp" />
+
+</android.support.constraint.ConstraintLayout>

@@ -32,6 +32,7 @@ public class cards extends AppCompatActivity {
 
         setContentView(R.layout.activity_cards);
         db = new SQLDataBase(this);
+        deleteMode = false;
 
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
@@ -80,40 +81,15 @@ public class cards extends AppCompatActivity {
                 }
                 else
                 {
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.error_toast, (ViewGroup) findViewById(R.id.error_toast));
-
-                    TextView text = (TextView) layout.findViewById(R.id.text);
-
-
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
-                    toast.setDuration(Toast.LENGTH_LONG);
-                    toast.setView(layout);
-                    text.setText("Test");
-
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }
             }
         });
-/*
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
-        {
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3)
-            {
 
-                cardList.remove(position);
-                aa.notifyDataSetChanged();
-
-                longPress = true;
-                return false;
-            }
-        });
-*/
         /*DELETE BUTTON*/
 
-        final Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        final ImageButton deleteButton = (ImageButton) findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,6 +168,7 @@ public class cards extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         db = new SQLDataBase(this);
+        deleteMode = false;
 
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
@@ -238,18 +215,6 @@ public class cards extends AppCompatActivity {
                 }
                 else
                 {
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.error_toast, (ViewGroup) findViewById(R.id.error_toast));
-
-                    TextView text = (TextView) layout.findViewById(R.id.text);
-
-
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
-                    toast.setDuration(Toast.LENGTH_LONG);
-                    toast.setView(layout);
-                    text.setText("Test");
-
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }
@@ -260,7 +225,7 @@ public class cards extends AppCompatActivity {
 
 
         /*DELETE BUTTON*/
-        final Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        final ImageButton deleteButton = (ImageButton) findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
