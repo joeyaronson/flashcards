@@ -29,12 +29,12 @@ public class SQLDataBase extends SQLiteOpenHelper {
 
     // Chapter table column names
     public static final String ChapterID = "CHAPTERID";
-    //public static final String Class  = "CLASSMANY";
+    public static final String ClassMany  = "CLASSMANY";
     public static final String ChapterName = "CHAPTERNAME";
 
     // Flashcard table column names
     public static final String CardID = "CARDID";
-    //public static final String ChapterMany = "CHAPTERMANY";
+    public static final String ChapterMany = "CHAPTERMANY";
     public static final String FC_Front = "FCFront";
     public static final String FC_Back = "FCBack";
     public static final String FC_Diff = "FCDiff"; // Difficulty of the flashcard
@@ -54,17 +54,22 @@ public class SQLDataBase extends SQLiteOpenHelper {
         // create chapter table
         db.execSQL("create table " + CHAPTER_TABLE + " (" +
                 ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ClassID + " INTEGER," +
-                ChapterName + " TEXT)");//," +
-                //"FOREIGN KEY (" + ClassID + ") REFERENCES (" + CLASS_TABLE + "(" + ClassID + ")))"); // connects the two tables
-        // create card table
+                ClassMany + " INTEGER," +
+                "FOREIGN KEY (" + ClassMany + ") REFERENCES " + CLASS_TABLE + " (" + ClassID + ")" + // connects the two tables
+                ChapterName + " TEXT)");  // create card table
         db.execSQL("create table " + CARD_TABLE + " (" +
                 CardID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ChapterID + " INTEGER," +
+                ChapterMany + " INTEGER," +
+                "FOREIGN KEY (" + ChapterMany + ") REFERENCES " + CHAPTER_TABLE + " (" + ChapterID + ")" + // connects the two tables
+                "ON DELETE SET NULL," +
                 FC_Front + " TEXT," +
                 FC_Back + " TEXT," +
                 //FC_Order + "," +
                 FC_Diff + " INTEGER)");
+        if (!db.isReadOnly()) {
+            // Enable foreign key constraints
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
     }
 
     // Singleton Implementation
@@ -80,6 +85,10 @@ public class SQLDataBase extends SQLiteOpenHelper {
         // MAke this do something, I guess\
         onCreate(db);
     }
+
+
+
+
 
     public boolean insertClass(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -97,8 +106,8 @@ public class SQLDataBase extends SQLiteOpenHelper {
     public boolean insertChapter(String name, int parentClassID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(ClassMany, parentClassID);
         contentValues.put(ChapterName, name);
-        contentValues.put(ClassID, parentClassID);
         long result = db.insert(CHAPTER_TABLE, null, contentValues);
         if(result == -1){
             return false;
@@ -111,7 +120,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
     public boolean insertCard(String front, String back, int parentChapterID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ChapterID, parentChapterID);
+        contentValues.put(ChapterMany, parentChapterID);
         contentValues.put(FC_Front, front);
         contentValues.put(FC_Back, back);
         contentValues.put(FC_Diff, 10); // just setting base difficulty to 5
@@ -123,6 +132,10 @@ public class SQLDataBase extends SQLiteOpenHelper {
         }
     }
 
+
+
+
+
     public Cursor getClasses() {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + CLASS_TABLE, null);
@@ -132,15 +145,38 @@ public class SQLDataBase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT " + ChapterID + "," + ChapterName +
                             " FROM " + CHAPTER_TABLE +
-                            " WHERE " + ClassID + " = '" + parentClassID + "'", null);
+                            " WHERE " + ClassMany + " = '" + parentClassID + "'", null);
     }
 
     public Cursor getCards(int parentChapterID) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT " + FC_Front + "," + FC_Back + "," + FC_Diff +
                 " FROM " + CARD_TABLE +
-                " WHERE " + ChapterID + " = '" + parentChapterID + "'", null);
+                " WHERE " + ChapterMany + " = '" + parentChapterID + "'", null);
     }
+
+
+
+
+
+    public void deleteClass(int classID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM" + CLASS_TABLE + "WHERE" + ClassID + " = " + classID);
+    }
+
+    public void deleteChapter(int chapterID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM" + CHAPTER_TABLE + "WHERE" + ChapterID + " = " + chapterID);
+    }
+
+    public void deleteCard(int cardID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM" + CARD_TABLE + "WHERE" + CardID + " = " + cardID);
+    }
+
+
+
+
 
     public void ClearDatabase(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -151,15 +187,15 @@ public class SQLDataBase extends SQLiteOpenHelper {
         db.execSQL("create table " + CLASS_TABLE + " (" +
                 ClassID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ClassName + " TEXT)");
-db.execSQL("create table " + CHAPTER_TABLE + " (" +
+        db.execSQL("create table " + CHAPTER_TABLE + " (" +
                 ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ClassID + " INTEGER," +
+                ClassMany + " INTEGER," +
                 ChapterName + " TEXT)");//," +
         //"FOREIGN KEY (" + ClassID + ") REFERENCES (" + CLASS_TABLE + "(" + ClassID + ")))"); // connects the two tables
         // create card table
         db.execSQL("create table " + CARD_TABLE + " (" +
                 CardID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ChapterID + " INTEGER," +
+                ChapterMany + " INTEGER," +
                 FC_Front + " TEXT," +
                 FC_Back + " TEXT," +
                 //FC_Order + "," +
