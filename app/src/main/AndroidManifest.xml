@@ -37,8 +37,15 @@
             android:name=".MainActivity"
             android:label="Classes" />
         <activity android:name=".CardView" />
-        <activity android:name=".playActivity" />
-        <activity android:name=".helpActivity"></activity>
+        <activity
+            android:name=".playActivity"
+            android:label="Quiz"
+            />
+        <activity
+            android:name=".helpActivity"
+            android:label="Help">
+
+        </activity>
     </application>
 
 </manifest>

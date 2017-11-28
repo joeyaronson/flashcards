@@ -6,30 +6,49 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient1"
     tools:context="ucsc.flashcards.helpActivity">
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
     <TextView
         android:id="@+id/noSets"
-        android:layout_width="334dp"
-        android:layout_height="172dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="320dp"
+        android:layout_height="510dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+
         android:layout_marginStart="16dp"
+        android:scrollbars="vertical"
         android:text='On the main screen press the "+" button to make a new class.
         \nClasses are like folders in which you can store sets of cards.
         \nFor example you could make a class: "CMPS 121"
+        \n
         \nClick the delete button to toggle "Delete Mode"
         \nWhen "Delete Mode" is on clicking on an item will delete it.
+        \n
         \nClicking on the created class will take you inside the class.
         \nInside you can find and create your sets.
         \nAn example of a set would be Midterm 1
+        \n
         \nClicking on a set will take you inside the set
-        \nHere '
-
+        \nHere you will find your individual cards.
+        \n
+        \nClicking the play button will take you into "Quiz Mode"
+        \nIn "Quiz Mode" you can review through all your flashcards.
+        \nTapping the card will flip it over.
+        \nIf you know the card, press the check button.
+        \nIf you need to review the card more, press the "x" button.'
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046"
-        tools:layout_editor_absoluteX="42dp" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteY="1dp"
+        tools:layout_editor_absoluteX="56dp" />
+    </ScrollView>
+
+
 
 </android.support.constraint.ConstraintLayout>

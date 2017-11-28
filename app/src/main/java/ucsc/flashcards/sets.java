@@ -74,6 +74,7 @@ public class sets extends AppCompatActivity {
 
                 else
                 {
+                    db.deleteChapter(setIdList.get(position));
                     setList.remove(position);
                     aa.notifyDataSetChanged();
                 }
@@ -169,6 +170,7 @@ public class sets extends AppCompatActivity {
 
                 else
                 {
+                    db.deleteChapter(setIdList.get(position));
                     setList.remove(position);
                     aa.notifyDataSetChanged();
                 }

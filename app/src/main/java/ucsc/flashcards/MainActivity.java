@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //CLEARS DATABASE
-        db.ClearDatabase();
+        //db.ClearDatabase();
 
         /*PULL FROM SQL HERE*/
         listView = (ListView) findViewById(R.id.classList);
@@ -130,6 +130,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, newClass.class);
+                isEmpty = false;
+                startActivity(intent);
+
+            }
+        });
+
+        /*HELP BUTTON*/
+        ImageButton helpButton = (ImageButton) findViewById(R.id.help);
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, helpActivity.class);
                 isEmpty = false;
                 startActivity(intent);
 
