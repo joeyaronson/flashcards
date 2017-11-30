@@ -147,6 +147,33 @@ public class cards extends AppCompatActivity {
             }
         });
 
+        /*SORT BUTTON*/
+        final ImageButton sortButton = (ImageButton) findViewById(R.id.sortButton);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.sort_toast, (ViewGroup) findViewById(R.id.sort_toast));
+
+                TextView text = (TextView) layout.findViewById(R.id.text);
+
+                Toast toast = new Toast(getApplicationContext());
+                toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+
+                if(sortMode)
+                {
+                    text.setText("Sort by Difficulty");
+                    sortMode = false;
+                } else {
+                    text.setText("Sort by Date Created");
+                    sortMode = true;
+                }
+                toast.show();
+            }
+        });
+
         /*NEW CARD BUTTON*/
         ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);
         newCardButton.setOnClickListener(new View.OnClickListener() {
@@ -304,7 +331,7 @@ public class cards extends AppCompatActivity {
 
 
                 Toast toast = new Toast(getApplicationContext());
-                toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+                toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
                 toast.setDuration(Toast.LENGTH_LONG);
                 toast.setView(layout);
 
@@ -321,6 +348,34 @@ public class cards extends AppCompatActivity {
                 toast.show();
 
 
+            }
+        });
+
+
+        /*SORT BUTTON*/
+        final ImageButton sortButton = (ImageButton) findViewById(R.id.sortButton);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.sort_toast, (ViewGroup) findViewById(R.id.sort_toast));
+
+                TextView text = (TextView) layout.findViewById(R.id.text);
+
+                Toast toast = new Toast(getApplicationContext());
+                toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+
+                if(sortMode)
+                {
+                    text.setText("Sort by Difficulty");
+                    sortMode = false;
+                } else {
+                    text.setText("Sort by Date Created");
+                    sortMode = true;
+                }
+                toast.show();
             }
         });
 
@@ -350,7 +405,7 @@ public class cards extends AppCompatActivity {
                     text.setText("There are no cards in this set.");
 
                     Toast toast = new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+                    toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
                     toast.setDuration(Toast.LENGTH_LONG);
                     toast.setView(layout);
                     toast.show();
