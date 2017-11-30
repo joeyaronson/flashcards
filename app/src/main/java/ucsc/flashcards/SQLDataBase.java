@@ -194,6 +194,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
     }
 
     public void deleteCard(int cardID){
+        System.out.println("OUT::::::::::"+cardID);
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + CARD_TABLE + " WHERE " + CardID + " = " + cardID);
     }

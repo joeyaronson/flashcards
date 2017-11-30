@@ -56,7 +56,7 @@ public class cards extends AppCompatActivity {
             isEmpty = false;
             cardList.add(classCurs.getString(0));
             cardBack.add(classCurs.getString(1));
-            cardIdList.add(classCurs.getInt(0));
+            cardIdList.add(classCurs.getInt(3));
 
         }
 
@@ -82,6 +82,7 @@ public class cards extends AppCompatActivity {
                 else
                 {
                     db.deleteCard(cardIdList.get(position));
+                    System.out.println("TEST::::::"+cardIdList.get(position));
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }
@@ -193,7 +194,7 @@ public class cards extends AppCompatActivity {
             isEmpty = false;
             cardList.add(classCurs.getString(0));
             cardBack.add(classCurs.getString(1));
-            cardIdList.add(classCurs.getInt(0));
+            cardIdList.add(classCurs.getInt(3));
 
         }
 
@@ -217,6 +218,7 @@ public class cards extends AppCompatActivity {
                 else
                 {
                     db.deleteCard(cardIdList.get(position));
+                    System.out.println("TEST::::::"+cardIdList.get(position));
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }
