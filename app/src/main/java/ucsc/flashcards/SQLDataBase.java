@@ -154,7 +154,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
                 " FROM " + CARD_TABLE +
                 " WHERE " + ChapterMany + " = '" + parentChapterID + "'", null);
     }
-
+    // Change the difficulty of each card
     public Cursor changeDiff(boolean correct, int parentChapterID){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
