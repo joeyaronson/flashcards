@@ -88,8 +88,8 @@ public class cards extends AppCompatActivity {
             }
         });
 
-        /*DELETE BUTTON*/
 
+        /*DELETE BUTTON*/
         final ImageButton deleteButton = (ImageButton) findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override

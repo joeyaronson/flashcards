@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/card"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="301dp"
+        android:layout_height="288dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -25,7 +25,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.193"
+        app:layout_constraintHorizontal_bias="0.511" />
 
 
     <ImageButton
@@ -73,6 +74,22 @@
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/card"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/countText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

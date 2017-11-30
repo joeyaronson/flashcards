@@ -24,6 +24,10 @@ public class playActivity extends AppCompatActivity {
         setDone = false;
         card.setText(frontList.get(i));
 
+        final TextView count = (TextView) findViewById(R.id.countText);
+
+        count.setText("1/"+frontList.size());
+
         card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +74,7 @@ public class playActivity extends AppCompatActivity {
                         }
                         else
                         {
+                            count.setText("0/0");
                             card.setText("Contrats! You have completed this set!");
                             setDone = true;
                         }
@@ -86,13 +91,19 @@ public class playActivity extends AppCompatActivity {
                         }
                         else
                         {
+                            count.setText("0/0");
                             card.setText("Congrats! You have completed this set!");
                             setDone = true;
                         }
                     }
-                } else {
+                }
+                else
+                {
                     finish();
                 }
+                count.setText((i+1) +"/"+frontList.size());
+
+
             }
         });
 
@@ -116,6 +127,7 @@ public class playActivity extends AppCompatActivity {
                 } else {
                     finish();
                 }
+                count.setText((i+1) +"/"+frontList.size());
             }
         });
 
