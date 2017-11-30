@@ -155,7 +155,22 @@ public class SQLDataBase extends SQLiteOpenHelper {
                 " WHERE " + ChapterMany + " = '" + parentChapterID + "'", null);
     }
 
-
+    public Cursor changeDiff(boolean correct, int parentChapterID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        if(correct){
+            int diff = contentValues.getAsInteger(FC_Diff);
+            diff++;
+            contentValues.put(FC_Diff, diff);
+        } else {
+            int diff = contentValues.getAsInteger(FC_Diff);
+            diff--;
+            contentValues.put(FC_Diff, diff);
+        }
+        return db.rawQuery("SELECT " + FC_Front + "," + FC_Back + "," + FC_Diff +
+                " FROM " + CARD_TABLE +
+                " WHERE " + ChapterMany + " = '" + parentChapterID + "'", null);
+    }
 
 
 

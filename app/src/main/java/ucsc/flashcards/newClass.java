@@ -21,6 +21,7 @@ import org.w3c.dom.Text;
 import static android.view.Gravity.BOTTOM;
 
 public class newClass extends AppCompatActivity {
+    //SQLDataBase.getInsance().
     SQLDataBase db;
 
     @Override
