@@ -125,7 +125,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
         contentValues.put(ChapterMany, parentChapterID);
         contentValues.put(FC_Front, front);
         contentValues.put(FC_Back, back);
-        contentValues.put(FC_Diff, 10); // just setting base difficulty to 5
+        contentValues.put(FC_Diff, 3); // just setting base difficulty to 5
         long result = db.insert(CARD_TABLE, null, contentValues);
         if(result == -1){
             return false;

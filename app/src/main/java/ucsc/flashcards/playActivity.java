@@ -24,7 +24,10 @@ public class playActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
         final ArrayList<String> frontList =  getIntent().getStringArrayListExtra("frontArray");
         final ArrayList<String> backList =  getIntent().getStringArrayListExtra("backArray");
+        final boolean sortMode =  getIntent().getExtras().getBoolean("sortMode");
+        final ArrayList<String> diffList =  getIntent().getStringArrayListExtra("diffArray");
         final TextView card = (TextView) findViewById(R.id.card);
+
 
         setDone = false;
 
@@ -35,7 +38,7 @@ public class playActivity extends AppCompatActivity {
 
         final TextView count = (TextView) findViewById(R.id.countText);
 
-        count.setText("1/"+frontList.size());
+        count.setText(i+"/"+frontList.size());
 
         card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +90,7 @@ public class playActivity extends AppCompatActivity {
                                 i = 0;
                             }
                             card.setText(frontList.get(i));
+                            count.setText((i+1) +"/"+frontList.size());
                         }
                         else
                         {
@@ -117,7 +121,6 @@ public class playActivity extends AppCompatActivity {
                 {
                     finish();
                 }
-                count.setText((i+1) +"/"+frontList.size());
 
 
             }
