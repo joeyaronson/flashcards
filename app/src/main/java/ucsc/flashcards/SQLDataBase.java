@@ -166,10 +166,12 @@ public class SQLDataBase extends SQLiteOpenHelper {
                 " FROM " + CARD_TABLE +
                 " WHERE " + CardID + " = '" + cardID + "'", null);
         int difficulty = cursor.getInt(0);
+        // 0 < Difficulty < 10
+        // Increment if user gets card right or wrong and if the difficulty is still in the range
         try{
-            if (correct) {
+            if (correct && (difficulty > 0)) {
                 difficulty--;
-            } else {
+            } else if(difficulty < 10){
                 difficulty++;
             }
             db.execSQL("UPDATE " + CARD_TABLE +
