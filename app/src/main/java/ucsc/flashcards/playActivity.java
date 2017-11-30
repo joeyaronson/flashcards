@@ -2,6 +2,7 @@ package ucsc.flashcards;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class playActivity extends AppCompatActivity {
 
         setDone = false;
         card.setText(frontList.get(i));
+        card.setMovementMethod(new ScrollingMovementMethod());
 
         final TextView count = (TextView) findViewById(R.id.countText);
 

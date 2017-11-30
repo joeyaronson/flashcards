@@ -24,7 +24,6 @@ import static android.view.Gravity.BOTTOM;
 public class cards extends AppCompatActivity {
     SQLDataBase db;
     boolean isEmpty = true;
-    boolean longPress = false;
     boolean deleteMode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
