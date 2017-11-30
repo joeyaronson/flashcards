@@ -83,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
                     db.deleteClass(classIdList.get(position));
                     classList.remove(position);
                     aa.notifyDataSetChanged();
-                    if(classList.isEmpty())
-                    {
-                        noClass.setText("No classes found, press the + button to create a class.");
-                    }
                 }
             }
             });

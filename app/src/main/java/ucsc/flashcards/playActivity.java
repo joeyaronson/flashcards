@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class playActivity extends AppCompatActivity {
 
     public boolean isFront = true;
-    public boolean setDone = false;
+    public boolean setDone;
     public int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,21 +20,26 @@ public class playActivity extends AppCompatActivity {
         final ArrayList<String> frontList =  getIntent().getStringArrayListExtra("frontArray");
         final ArrayList<String> backList =  getIntent().getStringArrayListExtra("backArray");
         final TextView card = (TextView) findViewById(R.id.card);
+
+        setDone = false;
         card.setText(frontList.get(i));
 
         card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(isFront)
+                if(!setDone)
                 {
-                    card.setText(backList.get(i));
-                    isFront = false;
-                }
-                else
-                {
-                    card.setText(frontList.get(i));
-                    isFront = true;
+                    if(isFront)
+                    {
+                        card.setText(backList.get(i));
+                        isFront = false;
+                    }
+                    else
+                    {
+                        card.setText(frontList.get(i));
+                        isFront = true;
+                    }
                 }
             }
         });
@@ -111,6 +116,15 @@ public class playActivity extends AppCompatActivity {
                 } else {
                     finish();
                 }
+            }
+        });
+
+        /*DONE BUTTON */
+        ImageButton done = (ImageButton) findViewById(R.id.doneButton);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               finish();
             }
         });
 
