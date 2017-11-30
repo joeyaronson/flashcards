@@ -26,6 +26,8 @@ public class cards extends AppCompatActivity {
     boolean isEmpty = true;
     boolean longPress = false;
     boolean deleteMode = false;
+    boolean sortMode = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,7 @@ public class cards extends AppCompatActivity {
         setContentView(R.layout.activity_cards);
         db = new SQLDataBase(this);
         deleteMode = false;
+        int index = 0;
 
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
@@ -49,16 +52,38 @@ public class cards extends AppCompatActivity {
         final ArrayList<String> cardList= new ArrayList<String>();
         final ArrayList<Integer> cardIdList= new ArrayList<Integer>();
         final ArrayList<String> cardBack = new ArrayList<String>();
+        final ArrayList<Integer> cardDiffList= new ArrayList<Integer>();
 
         Cursor classCurs = db.getCards(setID);
-        while(classCurs.moveToNext())
-        {
-            isEmpty = false;
-            cardList.add(classCurs.getString(0));
-            cardBack.add(classCurs.getString(1));
-            cardIdList.add(classCurs.getInt(3));
+        if( sortMode == false ){
+            while(classCurs.moveToNext())
+            {
+                isEmpty = false;
+                cardList.add(classCurs.getString(0));
+                cardBack.add(classCurs.getString(1));
+                cardIdList.add(classCurs.getInt(3));
+            }
+        } else {
+            for(int i = 5; i > 0; i--)
+            {
+                while(classCurs.moveToNext())
+                {
+                    if(classCurs.getInt(4) == i){
+                        index++;
+                        isEmpty = false;
+                        cardList.add(classCurs.getString(0));
+                        cardBack.add(classCurs.getString(1));
+                        cardIdList.add(classCurs.getInt(3));
+                        for(int j = 0; j < (i/2); i++)
+                        {
+                            cardDiffList.add(index);
+                        }
+                    }
+                }
+            }
 
         }
+
 
 
 
@@ -160,6 +185,8 @@ public class cards extends AppCompatActivity {
 
                     intent.putStringArrayListExtra("frontArray", cardList);
                     intent.putStringArrayListExtra("backArray", cardBack);
+                    intent.putIntegerArrayListExtra("diffArray", cardDiffList);
+                    intent.putExtra("sortMode", sortMode);
                     startActivity(intent);
                 }
 
@@ -167,10 +194,23 @@ public class cards extends AppCompatActivity {
         });
     }
 
+
+
+
+
+/* ---------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
     public void onResume() {
         super.onResume();
         db = new SQLDataBase(this);
         deleteMode = false;
+        int index = 0;
 
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
@@ -180,6 +220,7 @@ public class cards extends AppCompatActivity {
         final ArrayList<String> cardList= new ArrayList<String>();
         final ArrayList<Integer> cardIdList= new ArrayList<Integer>();
         final ArrayList<String> cardBack = new ArrayList<String>();
+        final ArrayList<Integer> cardDiffList= new ArrayList<Integer>();
 
         //DISPLAYS MESSAGE IF NO CLASSES
         TextView noSet = (TextView)findViewById(R.id.noCards);
@@ -189,12 +230,34 @@ public class cards extends AppCompatActivity {
         }
 
         Cursor classCurs = db.getCards(setID);
-        while(classCurs.moveToNext())
-        {
-            isEmpty = false;
-            cardList.add(classCurs.getString(0));
-            cardBack.add(classCurs.getString(1));
-            cardIdList.add(classCurs.getInt(3));
+
+        index = 0;
+        if( sortMode == false ){
+            while(classCurs.moveToNext())
+            {
+                isEmpty = false;
+                cardList.add(classCurs.getString(0));
+                cardBack.add(classCurs.getString(1));
+                cardIdList.add(classCurs.getInt(3));
+            }
+        } else {
+            for(int i = 5; i > 0; i--)
+            {
+                while(classCurs.moveToNext())
+                {
+                    if(classCurs.getInt(4) == i){
+                        index++;
+                        isEmpty = false;
+                        cardList.add(classCurs.getString(0));
+                        cardBack.add(classCurs.getString(1));
+                        cardIdList.add(classCurs.getInt(3));
+                        for(int j = 0; j < (i/2); i++)
+                        {
+                            cardDiffList.add(index);
+                        }
+                    }
+                }
+            }
 
         }
 
@@ -298,6 +361,8 @@ public class cards extends AppCompatActivity {
 
                     intent.putStringArrayListExtra("frontArray", cardList);
                     intent.putStringArrayListExtra("backArray", cardBack);
+                    intent.putIntegerArrayListExtra("diffArray", cardDiffList);
+                    intent.putExtra("sortMode", sortMode);
                     startActivity(intent);
                 }
 

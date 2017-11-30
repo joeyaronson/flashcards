@@ -159,19 +159,19 @@ public class SQLDataBase extends SQLiteOpenHelper {
 
 
     // Change the difficulty of each card
-    public boolean changeDiff(boolean correct, int parentChapterID, int cardID) {
+    public boolean changeDiff(boolean correct, int cardID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         Cursor cursor = db.rawQuery("SELECT " + FC_Diff +
                 " FROM " + CARD_TABLE +
                 " WHERE " + CardID + " = '" + cardID + "'", null);
         int difficulty = cursor.getInt(0);
-        // 0 < Difficulty < 10
+        // 0 < Difficulty <= 5
         // Increment if user gets card right or wrong and if the difficulty is still in the range
         try{
             if (correct && (difficulty > 0)) {
                 difficulty--;
-            } else if(difficulty < 10){
+            } else if(difficulty <= 5){
                 difficulty++;
             }
             db.execSQL("UPDATE " + CARD_TABLE +

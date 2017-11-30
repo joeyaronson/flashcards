@@ -7,12 +7,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class playActivity extends AppCompatActivity {
 
     public boolean isFront = true;
     public boolean setDone;
     public int i = 0;
+    public int nextIndex = 0;
+    Random rand = new Random();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +26,9 @@ public class playActivity extends AppCompatActivity {
         final TextView card = (TextView) findViewById(R.id.card);
 
         setDone = false;
+
+        i = rand.nextInt(frontList.size()-1);
+
         card.setText(frontList.get(i));
 
         final TextView count = (TextView) findViewById(R.id.countText);
@@ -55,21 +62,28 @@ public class playActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!setDone)
                 {
-                    if(i < frontList.size()-1)
-                    {
-                        frontList.remove(i);
-                        backList.remove(i);
-                        if(i+1 <  frontList.size()-1)
+                    //if(i < frontList.size()-1)
+                    //{
+                        /* if(i+1 <  frontList.size()-1)
                         {
                             i++;
                         }
                         else
                         {
                             i = 0;
-                        }
+                        } */
 
+
+                        frontList.remove(i);
+                        backList.remove(i);
                         if(frontList.size() > 0)
                         {
+                            if(frontList.size() > 1)
+                            {
+                                i = rand.nextInt(frontList.size());
+                            } else {
+                                i = 0;
+                            }
                             card.setText(frontList.get(i));
                         }
                         else
@@ -79,7 +93,7 @@ public class playActivity extends AppCompatActivity {
                             setDone = true;
                         }
 
-                    }
+                    /*}
                     else
                     {
                         frontList.remove(i);
@@ -95,7 +109,7 @@ public class playActivity extends AppCompatActivity {
                             card.setText("Congrats! You have completed this set!");
                             setDone = true;
                         }
-                    }
+                    }*/
                 }
                 else
                 {
@@ -114,7 +128,15 @@ public class playActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!setDone)
                 {
-                    if(i < frontList.size()-1)
+                    if(frontList.size() > 1){
+                        nextIndex = rand.nextInt(frontList.size());
+                        while(i == nextIndex){
+                            nextIndex = rand.nextInt(frontList.size());
+                        }
+                        i = nextIndex;
+                    }
+                    card.setText(frontList.get(i));
+                    /* if(i < frontList.size()-1)
                     {
                         i++;
                         card.setText(frontList.get(i));
@@ -123,11 +145,11 @@ public class playActivity extends AppCompatActivity {
                     {
                         i = 0;
                         card.setText(frontList.get(i));
-                    }
+                    } */
+                    count.setText((i+1) +"/"+frontList.size());
                 } else {
                     finish();
                 }
-                count.setText((i+1) +"/"+frontList.size());
             }
         });
 
