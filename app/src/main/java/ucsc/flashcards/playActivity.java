@@ -85,6 +85,8 @@ public class playActivity extends AppCompatActivity {
                             setDone = true;
                         }
                     }
+                } else {
+                    finish();
                 }
             }
         });
@@ -106,6 +108,8 @@ public class playActivity extends AppCompatActivity {
                         i = 0;
                         card.setText(frontList.get(i));
                     }
+                } else {
+                    finish();
                 }
             }
         });

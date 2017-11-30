@@ -3,6 +3,7 @@ package ucsc.flashcards;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -56,6 +57,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
                 ChapterID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ClassMany + " INTEGER," +
                 //"FOREIGN KEY (" + ClassMany + ") REFERENCES " + CLASS_TABLE + " (" + ClassID + ")" + // connects the two tables
+                //"ON DELETE SET NULL," +
                 ChapterName + " TEXT)");  // create card table
         db.execSQL("create table " + CARD_TABLE + " (" +
                 CardID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -150,26 +152,33 @@ public class SQLDataBase extends SQLiteOpenHelper {
 
     public Cursor getCards(int parentChapterID) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT " + FC_Front + "," + FC_Back + "," + FC_Diff +
+        return db.rawQuery("SELECT " + FC_Front + "," + FC_Back + "," + FC_Diff + "," + CardID +
                 " FROM " + CARD_TABLE +
                 " WHERE " + ChapterMany + " = '" + parentChapterID + "'", null);
     }
+
+
     // Change the difficulty of each card
-    public Cursor changeDiff(boolean correct, int parentChapterID){
+    public boolean changeDiff(boolean correct, int parentChapterID, int cardID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        if(correct){
-            int diff = contentValues.getAsInteger(FC_Diff);
-            diff++;
-            contentValues.put(FC_Diff, diff);
-        } else {
-            int diff = contentValues.getAsInteger(FC_Diff);
-            diff--;
-            contentValues.put(FC_Diff, diff);
-        }
-        return db.rawQuery("SELECT " + FC_Front + "," + FC_Back + "," + FC_Diff +
+        Cursor cursor = db.rawQuery("SELECT " + FC_Diff +
                 " FROM " + CARD_TABLE +
-                " WHERE " + ChapterMany + " = '" + parentChapterID + "'", null);
+                " WHERE " + CardID + " = '" + cardID + "'", null);
+        int difficulty = cursor.getInt(0);
+        try{
+            if (correct) {
+                difficulty--;
+            } else {
+                difficulty++;
+            }
+            db.execSQL("UPDATE " + CARD_TABLE +
+                    " SET " + FC_Diff + " = " + difficulty +
+                    " WHERE " + CardID + " = " + cardID);
+            return(true);
+        } catch (SQLException mSQLException) {
+            return(false);
+        }
     }
 
 
