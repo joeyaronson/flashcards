@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".splashScreen"
-            android:label="Flashcards">
+            android:label="Flashcards"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,29 +21,38 @@
         </activity>
         <activity
             android:name=".newSet"
-            android:label="Make a New Set" />
+            android:label="Make a New Set"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".newCard"
-            android:label="Make a New Card" />
+            android:label="Make a New Card"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".sets"
-            android:label="Sets of Flashcards" />
+            android:label="Sets of Flashcards"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".newClass"
-            android:label="Make a New Class" />
+            android:label="Make a New Class"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".cards"
-            android:label="Flashcards" />
+            android:label="Flashcards"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
-            android:label="Classes" />
-        <activity android:name=".CardView" />
+            android:label="Classes"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CardView"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".playActivity"
-            android:label="Quiz" />
+            android:label="Quiz"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".helpActivity"
-            android:label="Help"></activity>
+            android:label="Help"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -37,6 +37,8 @@ public class playActivity extends AppCompatActivity {
 
         final ProgressBar progressBar=(ProgressBar)findViewById(R.id.pileProgress); // initiate the progress bar
         progressBar.setMax(100); // 100 maximum value for the progress value
+        progressBar.setScaleY(3f);
+
         initialCards = frontList.size();
         if(sortMode){ //set the starting progress
             progressBar.setProgress((100*diffList.size())/(initialCards*5));
@@ -115,6 +117,7 @@ public class playActivity extends AppCompatActivity {
                                 } else {
                                     i = rand.nextInt(frontList.size());
                                     progressBar.setProgress((100*frontList.size())/initialCards);
+                                    System.out.println("i = "+i);
                                 }
                             } else {
                                 i = 0;
@@ -184,7 +187,8 @@ public class playActivity extends AppCompatActivity {
                     } */
 
                     //count.setText((i+1) +"/"+frontList.size());
-                } else {
+                }
+                else {
                     finish();
                 }
             }

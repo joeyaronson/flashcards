@@ -53,6 +53,10 @@ public class cards extends AppCompatActivity {
         final ArrayList<String> cardBack = new ArrayList<String>();
         final ArrayList<Integer> cardDiffList= new ArrayList<Integer>();
 
+        /* ARRAY ADAPTER */
+        final ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
+        listView.setAdapter(aa);
+
         Cursor classCurs = db.getCards(setID);
         if( sortMode == false ){
             while(classCurs.moveToNext())
@@ -61,7 +65,9 @@ public class cards extends AppCompatActivity {
                 cardList.add(classCurs.getString(0));
                 cardBack.add(classCurs.getString(1));
                 cardIDList.add(classCurs.getInt(3));
+
             }
+            aa.notifyDataSetChanged();
         } else {
             for(int i = 5; i >= 0; i--)
             {
@@ -81,15 +87,13 @@ public class cards extends AppCompatActivity {
                     }
                 }
             }
+            aa.notifyDataSetChanged();
 
         }
 
 
 
 
-        /* ARRAY ADAPTER */
-        final ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
-        listView.setAdapter(aa);
 
         /*IF ARRAY IS CLICKED*/
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -107,7 +111,6 @@ public class cards extends AppCompatActivity {
                 else
                 {
                     db.deleteCard(cardIDList.get(position));
-                    System.out.println("TEST::::::"+cardIDList.get(position));
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }
@@ -260,6 +263,9 @@ public class cards extends AppCompatActivity {
         }
 
         Cursor classCurs = db.getCards(setID);
+        /* ARRAY ADAPTER */
+        final ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
+        listView.setAdapter(aa);
 
         index = 0;
         if( sortMode == false ){
@@ -270,6 +276,7 @@ public class cards extends AppCompatActivity {
                 cardBack.add(classCurs.getString(1));
                 cardIDList.add(classCurs.getInt(3));
             }
+            aa.notifyDataSetChanged();
         } else {
             for(int i = 5; i >= 0; i--)
             {
@@ -289,12 +296,9 @@ public class cards extends AppCompatActivity {
                     }
                 }
             }
-
+            aa.notifyDataSetChanged();
         }
 
-        /* ARRAY ADAPTER */
-        final ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
-        listView.setAdapter(aa);
 
          /*IF ARRAY IS CLICKED*/
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -380,6 +384,7 @@ public class cards extends AppCompatActivity {
                     aa.notifyDataSetChanged();
                     sortMode = true;
                 }
+                aa.notifyDataSetChanged();
                 toast.show();
             }
         });
