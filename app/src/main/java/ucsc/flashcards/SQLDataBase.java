@@ -125,7 +125,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
         contentValues.put(ChapterMany, parentChapterID);
         contentValues.put(FC_Front, front);
         contentValues.put(FC_Back, back);
-        contentValues.put(FC_Diff, 3); // just setting base difficulty to 5
+        contentValues.put(FC_Diff, 5); // just setting base difficulty to 5 (highest difficulty)
         long result = db.insert(CARD_TABLE, null, contentValues);
         if(result == -1){
             return false;
@@ -165,7 +165,12 @@ public class SQLDataBase extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT " + FC_Diff +
                 " FROM " + CARD_TABLE +
                 " WHERE " + CardID + " = '" + cardID + "'", null);
-        int difficulty = cursor.getInt(0);
+        int difficulty;
+        if(cursor.moveToNext()){
+            difficulty = cursor.getInt(0);
+        } else {
+            return(false);
+        }
         // 0 < Difficulty <= 5
         // Increment if user gets card right or wrong and if the difficulty is still in the range
         try{

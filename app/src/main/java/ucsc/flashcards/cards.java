@@ -47,9 +47,9 @@ public class cards extends AppCompatActivity {
         }
 
 
-        ListView listView = (ListView) findViewById(R.id.cardList);
+        final ListView listView = (ListView) findViewById(R.id.cardList);
         final ArrayList<String> cardList= new ArrayList<String>();
-        final ArrayList<Integer> cardIdList= new ArrayList<Integer>();
+        final ArrayList<Integer> cardIDList= new ArrayList<Integer>();
         final ArrayList<String> cardBack = new ArrayList<String>();
         final ArrayList<Integer> cardDiffList= new ArrayList<Integer>();
 
@@ -60,10 +60,10 @@ public class cards extends AppCompatActivity {
                 isEmpty = false;
                 cardList.add(classCurs.getString(0));
                 cardBack.add(classCurs.getString(1));
-                cardIdList.add(classCurs.getInt(3));
+                cardIDList.add(classCurs.getInt(3));
             }
         } else {
-            for(int i = 5; i > 0; i--)
+            for(int i = 5; i >= 0; i--)
             {
                 classCurs = db.getCards(setID);
                 while(classCurs.moveToNext())
@@ -73,8 +73,8 @@ public class cards extends AppCompatActivity {
                         isEmpty = false;
                         cardList.add(classCurs.getString(0));
                         cardBack.add(classCurs.getString(1));
-                        cardIdList.add(classCurs.getInt(3));
-                        for(int j = 0; j < (i/2); j++)
+                        cardIDList.add(classCurs.getInt(3));
+                        for(int j = 0; j < ((i/2)+2); j++)
                         {
                             cardDiffList.add(index);
                         }
@@ -106,8 +106,8 @@ public class cards extends AppCompatActivity {
                 }
                 else
                 {
-                    db.deleteCard(cardIdList.get(position));
-                    System.out.println("TEST::::::"+cardIdList.get(position));
+                    db.deleteCard(cardIDList.get(position));
+                    System.out.println("TEST::::::"+cardIDList.get(position));
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }
@@ -164,10 +164,12 @@ public class cards extends AppCompatActivity {
 
                 if(sortMode)
                 {
-                    text.setText("Sort by Difficulty");
+                    text.setText("Sort by Date Created");
+                    listView.invalidateViews();
                     sortMode = false;
                 } else {
-                    text.setText("Sort by Date Created");
+                    text.setText("Sort by Difficulty");
+                    listView.invalidateViews();
                     sortMode = true;
                 }
                 toast.show();
@@ -213,6 +215,7 @@ public class cards extends AppCompatActivity {
                     intent.putStringArrayListExtra("frontArray", cardList);
                     intent.putStringArrayListExtra("backArray", cardBack);
                     intent.putIntegerArrayListExtra("diffArray", cardDiffList);
+                    intent.putIntegerArrayListExtra("cardIDArray", cardIDList);
                     intent.putExtra("sortMode", sortMode);
                     startActivity(intent);
                 }
@@ -243,9 +246,9 @@ public class cards extends AppCompatActivity {
         final int setID = getIntent().getExtras().getInt("setPosition");
 
 
-        ListView listView = (ListView) findViewById(R.id.cardList);
+        final ListView listView = (ListView) findViewById(R.id.cardList);
         final ArrayList<String> cardList= new ArrayList<String>();
-        final ArrayList<Integer> cardIdList= new ArrayList<Integer>();
+        final ArrayList<Integer> cardIDList= new ArrayList<Integer>();
         final ArrayList<String> cardBack = new ArrayList<String>();
         final ArrayList<Integer> cardDiffList= new ArrayList<Integer>();
 
@@ -265,10 +268,10 @@ public class cards extends AppCompatActivity {
                 isEmpty = false;
                 cardList.add(classCurs.getString(0));
                 cardBack.add(classCurs.getString(1));
-                cardIdList.add(classCurs.getInt(3));
+                cardIDList.add(classCurs.getInt(3));
             }
         } else {
-            for(int i = 5; i > 0; i--)
+            for(int i = 5; i >= 0; i--)
             {
                 classCurs = db.getCards(setID);
                 while(classCurs.moveToNext())
@@ -277,8 +280,8 @@ public class cards extends AppCompatActivity {
                         isEmpty = false;
                         cardList.add(classCurs.getString(0));
                         cardBack.add(classCurs.getString(1));
-                        cardIdList.add(classCurs.getInt(3));
-                        for(int j = 0; j < (i/2); j++)
+                        cardIDList.add(classCurs.getInt(3));
+                        for(int j = 0; j < ((i/2)+2); j++)
                         {
                             cardDiffList.add(index);
                         }
@@ -308,8 +311,8 @@ public class cards extends AppCompatActivity {
                 }
                 else
                 {
-                    db.deleteCard(cardIdList.get(position));
-                    System.out.println("TEST::::::"+cardIdList.get(position));
+                    db.deleteCard(cardIDList.get(position));
+                    System.out.println("TEST::::::"+cardIDList.get(position));
                     cardList.remove(position);
                     aa.notifyDataSetChanged();
                 }
@@ -369,10 +372,12 @@ public class cards extends AppCompatActivity {
 
                 if(sortMode)
                 {
-                    text.setText("Sort by Difficulty");
+                    text.setText("Sort by Date Created");
+                    listView.invalidateViews();
                     sortMode = false;
                 } else {
-                    text.setText("Sort by Date Created");
+                    text.setText("Sort by Difficulty");
+                    listView.invalidateViews();
                     sortMode = true;
                 }
                 toast.show();
@@ -418,6 +423,7 @@ public class cards extends AppCompatActivity {
                     intent.putStringArrayListExtra("frontArray", cardList);
                     intent.putStringArrayListExtra("backArray", cardBack);
                     intent.putIntegerArrayListExtra("diffArray", cardDiffList);
+                    intent.putIntegerArrayListExtra("cardIDArray", cardIDList);
                     intent.putExtra("sortMode", sortMode);
                     startActivity(intent);
                 }
