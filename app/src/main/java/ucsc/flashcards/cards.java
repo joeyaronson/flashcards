@@ -39,13 +39,6 @@ public class cards extends AppCompatActivity {
         //pulling position of list from previous activity
         final int setID = getIntent().getExtras().getInt("setPosition");
 
-        //DISPLAYS MESSAGE IF NO CLASSES
-        TextView noSet = (TextView)findViewById(R.id.noCards);
-        if(!isEmpty)
-        {
-            noSet.setText("");
-        }
-
 
         final ListView listView = (ListView) findViewById(R.id.cardList);
         final ArrayList<String> cardList= new ArrayList<String>();
@@ -84,7 +77,12 @@ public class cards extends AppCompatActivity {
 
         }
 
-
+        //DISPLAYS MESSAGE IF NO CLASSES
+        TextView noSet = (TextView)findViewById(R.id.noCards);
+        if(!isEmpty)
+        {
+            noSet.setText("");
+        }
 
 
         /* ARRAY ADAPTER */
@@ -156,6 +154,10 @@ public class cards extends AppCompatActivity {
                 View layout = inflater.inflate(R.layout.sort_toast, (ViewGroup) findViewById(R.id.sort_toast));
 
                 TextView text = (TextView) layout.findViewById(R.id.text);
+
+                /* ARRAY ADAPTER */
+                final ArrayAdapter aa = new ArrayAdapter<String>(getApplicationContext(),R.layout.whitetext,cardList);
+                listView.setAdapter(aa);
 
                 Toast toast = new Toast(getApplicationContext());
                 toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
@@ -284,14 +286,10 @@ public class cards extends AppCompatActivity {
         final ArrayList<String> cardBack = new ArrayList<String>();
         final ArrayList<Integer> cardDiffList= new ArrayList<Integer>();
 
-        //DISPLAYS MESSAGE IF NO CLASSES
-        TextView noSet = (TextView)findViewById(R.id.noCards);
-        if(!isEmpty)
-        {
-            noSet.setText("");
-        }
 
         Cursor classCurs = db.getCards(setID);
+
+        isEmpty = true;
 
         index = 0;
         if( sortMode == false ){
@@ -321,6 +319,13 @@ public class cards extends AppCompatActivity {
                     }
                 }
             }
+        }
+
+        //DISPLAYS MESSAGE IF NO CLASSES
+        TextView noSet = (TextView)findViewById(R.id.noCards);
+        if(!isEmpty)
+        {
+            noSet.setText("");
         }
 
         /* ARRAY ADAPTER */
@@ -440,7 +445,7 @@ public class cards extends AppCompatActivity {
                 }
                 toast.show();
             }
-        }); */
+        });
 
         /*NEW CARD BUTTON*/
         ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);

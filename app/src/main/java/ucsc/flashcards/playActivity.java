@@ -82,20 +82,21 @@ public class playActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!setDone) {
-
+                    db.changeDiff(true, cardIDList.get(i));
                     if(sortMode) {
-                        diffList.remove((Integer)i);
                         if(diffList.size() > 0)
                         {
-                            if(frontList.size() > 1) {
+                            diffList.remove((Integer)i);
+                            if(diffList.size() > 1) {
                                 nextIndex = diffList.get(rand.nextInt(diffList.size()));
                                 while (i == nextIndex) {
-                                    nextIndex = (int) diffList.get(rand.nextInt(diffList.size()));
+                                    nextIndex = diffList.get(rand.nextInt(diffList.size()));
                                 }
                                 i = nextIndex;
                             } else {
                                 i = diffList.get(0);
                             }
+                            card.setText(frontList.get(i));
                             progressBar.setProgress((100*diffList.size())/(initialCards*5));
                         } else {
                             //count.setText("0/0");
@@ -103,7 +104,13 @@ public class playActivity extends AppCompatActivity {
                             card.setText("Contrats! You have completed this set!");
                             setDone = true;
                         }
-
+                        for(int j = 0; diffList.get(j) != i; j++){
+                            if( j == diffList.size() - 1 ){
+                                progressBar.setProgress(0);
+                                card.setText("Contrats! You have completed this set!");
+                                setDone = true;
+                            }
+                        }
                     } else {
                         frontList.remove(i);
                         backList.remove(i);
@@ -112,13 +119,12 @@ public class playActivity extends AppCompatActivity {
                             if(frontList.size() > 1)
                             {
                                 i = rand.nextInt(frontList.size());
-                                progressBar.setProgress((100*frontList.size())/initialCards);
                             } else {
                                 i = 0;
                             }
+                            progressBar.setProgress((100*frontList.size())/initialCards);
                             card.setText(frontList.get(i));
                             //count.setText((i+1) +"/"+frontList.size());
-                            db.changeDiff(true, cardIDList.get(i));
                         } else {
                             //count.setText("0/0");
                             progressBar.setProgress(0);
@@ -126,7 +132,6 @@ public class playActivity extends AppCompatActivity {
                             setDone = true;
                         }
                     }
-
                 } else {
                     finish();
                 }
@@ -146,12 +151,15 @@ public class playActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!setDone)
                 {
+
+                    if( db.changeDiff(false, cardIDList.get(i)) ){
+                        diffList.add(i);
+                    }
                     if(frontList.size() > 1){
                         if( sortMode ){
-                            diffList.add(i);
-                            nextIndex = (int)diffList.get(rand.nextInt(diffList.size()));
+                            nextIndex = diffList.get(rand.nextInt(diffList.size()));
                             while( i == nextIndex ){
-                                nextIndex = (int)diffList.get(rand.nextInt(diffList.size()));
+                                nextIndex = diffList.get(rand.nextInt(diffList.size()));
                             }
                             i = nextIndex;
                             progressBar.setProgress((100*diffList.size())/(initialCards*5));
@@ -165,7 +173,6 @@ public class playActivity extends AppCompatActivity {
                         }
                     }
                     card.setText(frontList.get(i));
-                    db.changeDiff(false, cardIDList.get(i));
                     /* if(i < frontList.size()-1)
                     {
                         i++;
