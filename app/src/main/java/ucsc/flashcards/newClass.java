@@ -58,7 +58,7 @@ public class newClass extends AppCompatActivity {
             text.setText("Please enter a class name.");
 
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
             toast.show();
@@ -79,7 +79,7 @@ public class newClass extends AppCompatActivity {
             TextView text = (TextView) layout.findViewById(R.id.text);
             text.setText("Class Saved.");
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
             toast.setDuration(Toast.LENGTH_LONG);
 
             toast.setView(layout);

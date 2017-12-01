@@ -50,7 +50,7 @@ public class newSet extends AppCompatActivity {
             text.setText("Please enter a set name.");
 
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
             toast.show();
@@ -74,7 +74,7 @@ public class newSet extends AppCompatActivity {
             text.setText("Set Saved.");
 
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
             toast.show();
