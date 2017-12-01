@@ -84,9 +84,11 @@ public class playActivity extends AppCompatActivity {
                 if(!setDone) {
                     db.changeDiff(true, cardIDList.get(i));
                     if(sortMode) {
+                        //if(diffList.size() > 0){
+                            diffList.remove((Integer)i);
+                        //}
                         if(diffList.size() > 0)
                         {
-                            diffList.remove((Integer)i);
                             if(diffList.size() > 1) {
                                 nextIndex = diffList.get(rand.nextInt(diffList.size()));
                                 while (i == nextIndex) {
@@ -98,13 +100,20 @@ public class playActivity extends AppCompatActivity {
                             }
                             card.setText(frontList.get(i));
                             progressBar.setProgress((100*diffList.size())/(initialCards*5));
+                            for(int j = 0; diffList.size() != 0 && diffList.get(j) != i; j++){
+                                if( j == diffList.size() - 1 ){
+                                    progressBar.setProgress(0);
+                                    card.setText("Contrats! You have completed this set!");
+                                    setDone = true;
+                                }
+                            }
                         } else {
                             //count.setText("0/0");
                             progressBar.setProgress(0);
                             card.setText("Contrats! You have completed this set!");
                             setDone = true;
                         }
-                        for(int j = 0; diffList.get(j) != i; j++){
+                        for(int j = 0; diffList.size() != 0 && diffList.get(j) != i; j++){
                             if( j == diffList.size() - 1 ){
                                 progressBar.setProgress(0);
                                 card.setText("Contrats! You have completed this set!");
