@@ -162,13 +162,45 @@ public class cards extends AppCompatActivity {
                 toast.setDuration(Toast.LENGTH_LONG);
                 toast.setView(layout);
 
+                cardList.clear();
+                cardIDList.clear();
+                cardBack.clear();
+                cardDiffList.clear();
+
+                int index = 0;
+                Cursor classCurs = db.getCards(setID);
                 if(sortMode)
                 {
                     text.setText("Sort by Date Created");
+                    while(classCurs.moveToNext())
+                    {
+                        isEmpty = false;
+                        cardList.add(classCurs.getString(0));
+                        cardBack.add(classCurs.getString(1));
+                        cardIDList.add(classCurs.getInt(3));
+                    }
                     aa.notifyDataSetChanged();
                     sortMode = false;
                 } else {
                     text.setText("Sort by Difficulty");
+                    for(int i = 5; i >= 0; i--)
+                    {
+                        classCurs = db.getCards(setID);
+                        while(classCurs.moveToNext())
+                        {
+                            if(classCurs.getInt(2) == i){
+                                index++;
+                                isEmpty = false;
+                                cardList.add(classCurs.getString(0));
+                                cardBack.add(classCurs.getString(1));
+                                cardIDList.add(classCurs.getInt(3));
+                                for(int j = 0; j < ((i/2)+2); j++)
+                                {
+                                    cardDiffList.add(index);
+                                }
+                            }
+                        }
+                    }
                     aa.notifyDataSetChanged();
                     sortMode = true;
                 }
@@ -289,7 +321,6 @@ public class cards extends AppCompatActivity {
                     }
                 }
             }
-
         }
 
         /* ARRAY ADAPTER */
@@ -356,7 +387,7 @@ public class cards extends AppCompatActivity {
 
 
         /*SORT BUTTON*/
-        final ImageButton sortButton = (ImageButton) findViewById(R.id.sortButton);
+        /*final ImageButton sortButton = (ImageButton) findViewById(R.id.sortButton);
         sortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -370,19 +401,46 @@ public class cards extends AppCompatActivity {
                 toast.setDuration(Toast.LENGTH_LONG);
                 toast.setView(layout);
 
+                int index = 0;
+                Cursor classCurs = db.getCards(setID);
                 if(sortMode)
                 {
                     text.setText("Sort by Date Created");
+                    while(classCurs.moveToNext())
+                    {
+                        isEmpty = false;
+                        cardList.add(classCurs.getString(0));
+                        cardBack.add(classCurs.getString(1));
+                        cardIDList.add(classCurs.getInt(3));
+                    }
                     aa.notifyDataSetChanged();
                     sortMode = false;
                 } else {
                     text.setText("Sort by Difficulty");
+                    for(int i = 5; i >= 0; i--)
+                    {
+                        classCurs = db.getCards(setID);
+                        while(classCurs.moveToNext())
+                        {
+                            if(classCurs.getInt(2) == i){
+                                index++;
+                                isEmpty = false;
+                                cardList.add(classCurs.getString(0));
+                                cardBack.add(classCurs.getString(1));
+                                cardIDList.add(classCurs.getInt(3));
+                                for(int j = 0; j < ((i/2)+2); j++)
+                                {
+                                    cardDiffList.add(index);
+                                }
+                            }
+                        }
+                    }
                     aa.notifyDataSetChanged();
                     sortMode = true;
                 }
                 toast.show();
             }
-        });
+        }); */
 
         /*NEW CARD BUTTON*/
         ImageButton newCardButton = (ImageButton) findViewById(R.id.newCard);

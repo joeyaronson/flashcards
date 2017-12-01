@@ -81,59 +81,53 @@ public class playActivity extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!setDone)
-                {
-                    //if(i < frontList.size()-1)
-                    //{
-                        /* if(i+1 <  frontList.size()-1)
-                        {
-                            i++;
-                        }
-                        else
-                        {
-                            i = 0;
-                        } */
+                if(!setDone) {
 
-
-                        if(sortMode){
-                            diffList.remove((Integer)i);
-                        } else {
-                            frontList.remove(i);
-                            backList.remove(i);
-                        }
-                        if(frontList.size() > 0)
+                    if(sortMode) {
+                        diffList.remove((Integer)i);
+                        if(diffList.size() > 0)
                         {
-                            if(frontList.size() > 1)
-                            {
-                                if( sortMode ){
-                                    nextIndex = (int)diffList.get(rand.nextInt(diffList.size()));
-                                    while( i == nextIndex ){
-                                        nextIndex = (int)diffList.get(rand.nextInt(diffList.size()));
-                                    }
-                                    i = nextIndex;
-                                    progressBar.setProgress((100*diffList.size())/(initialCards*5));
-                                } else {
-                                    i = rand.nextInt(frontList.size());
-                                    progressBar.setProgress((100*frontList.size())/initialCards);
+                            if(frontList.size() > 1) {
+                                nextIndex = diffList.get(rand.nextInt(diffList.size()));
+                                while (i == nextIndex) {
+                                    nextIndex = (int) diffList.get(rand.nextInt(diffList.size()));
                                 }
+                                i = nextIndex;
                             } else {
-                                i = 0;
+                                i = diffList.get(0);
                             }
-                            card.setText(frontList.get(i));
-                            //count.setText((i+1) +"/"+frontList.size());
-                            db.changeDiff(true, cardIDList.get(i));
-                        }
-                        else
-                        {
+                            progressBar.setProgress((100*diffList.size())/(initialCards*5));
+                        } else {
                             //count.setText("0/0");
                             progressBar.setProgress(0);
                             card.setText("Contrats! You have completed this set!");
                             setDone = true;
                         }
 
-                }
-                else
-                {
+                    } else {
+                        frontList.remove(i);
+                        backList.remove(i);
+                        if(frontList.size() > 0)
+                        {
+                            if(frontList.size() > 1)
+                            {
+                                i = rand.nextInt(frontList.size());
+                                progressBar.setProgress((100*frontList.size())/initialCards);
+                            } else {
+                                i = 0;
+                            }
+                            card.setText(frontList.get(i));
+                            //count.setText((i+1) +"/"+frontList.size());
+                            db.changeDiff(true, cardIDList.get(i));
+                        } else {
+                            //count.setText("0/0");
+                            progressBar.setProgress(0);
+                            card.setText("Contrats! You have completed this set!");
+                            setDone = true;
+                        }
+                    }
+
+                } else {
                     finish();
                 }
 
