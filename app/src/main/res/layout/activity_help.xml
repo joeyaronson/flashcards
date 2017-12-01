@@ -36,7 +36,8 @@
         \nIn "Quiz Mode" you can review through all your flashcards.
         \nTapping the card will flip it over.
         \nIf you know the card, press the check button.
-        \nIf you need to review the card more, press the "x" button.'
+        \nIf you need to review the card more, press the "x" button.
+        \n\n\n\n\n'
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

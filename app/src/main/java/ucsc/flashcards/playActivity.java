@@ -38,7 +38,7 @@ public class playActivity extends AppCompatActivity {
 
         final TextView count = (TextView) findViewById(R.id.countText);
 
-        count.setText(i+"/"+frontList.size());
+        count.setText((i+1)+"/"+frontList.size());
 
         card.setOnClickListener(new View.OnClickListener() {
             @Override

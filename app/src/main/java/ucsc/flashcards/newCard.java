@@ -54,7 +54,7 @@ public class newCard extends AppCompatActivity {
             text.setText("Please enter front and back of card.");
 
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
             toast.show();
@@ -69,7 +69,7 @@ public class newCard extends AppCompatActivity {
             text.setText("Please enter front of card.");
 
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
             toast.show();
@@ -84,7 +84,7 @@ public class newCard extends AppCompatActivity {
             text.setText("Please enter back of card.");
 
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
             toast.show();
@@ -110,7 +110,7 @@ public class newCard extends AppCompatActivity {
             text.setText("Card Saved.");
 
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 150);
+            toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
             toast.show();
