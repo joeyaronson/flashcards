@@ -165,11 +165,11 @@ public class cards extends AppCompatActivity {
                 if(sortMode)
                 {
                     text.setText("Sort by Date Created");
-                    listView.invalidateViews();
+                    aa.notifyDataSetChanged();
                     sortMode = false;
                 } else {
                     text.setText("Sort by Difficulty");
-                    listView.invalidateViews();
+                    aa.notifyDataSetChanged();
                     sortMode = true;
                 }
                 toast.show();
@@ -373,11 +373,11 @@ public class cards extends AppCompatActivity {
                 if(sortMode)
                 {
                     text.setText("Sort by Date Created");
-                    listView.invalidateViews();
+                    aa.notifyDataSetChanged();
                     sortMode = false;
                 } else {
                     text.setText("Sort by Difficulty");
-                    listView.invalidateViews();
+                    aa.notifyDataSetChanged();
                     sortMode = true;
                 }
                 toast.show();
