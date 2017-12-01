@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     boolean isEmpty = true;
     boolean deleteMode = false;
-    boolean sortMode = false;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,37 +120,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*SORT BUTTON*/
-        final ImageButton sortButton = (ImageButton) findViewById(R.id.sortButton);
-        sortButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.sort_toast, (ViewGroup) findViewById(R.id.sort_toast));
-
-                TextView text = (TextView) layout.findViewById(R.id.text);
-
-
-                Toast toast = new Toast(getApplicationContext());
-                toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setView(layout);
-
-                if(sortMode)
-                {
-                    text.setText("Sort by Difficulty");
-                    sortMode = false;
-                }
-                else
-                {
-                    text.setText("Sort by Date Created");
-                    sortMode = true;
-                }
-                toast.show();
-
-
-            }
-        });
 
         /*NEW CLASS BUTTON*/
         ImageButton newClassButton = (ImageButton) findViewById(R.id.newClass);
@@ -263,37 +231,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*SORT BUTTON*/
-        final ImageButton sortButton = (ImageButton) findViewById(R.id.sortButton);
-        sortButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.sort_toast, (ViewGroup) findViewById(R.id.sort_toast));
 
-                TextView text = (TextView) layout.findViewById(R.id.text);
-
-
-                Toast toast = new Toast(getApplicationContext());
-                toast.setGravity(Gravity.CENTER|BOTTOM, 0, 200);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setView(layout);
-
-                if(sortMode)
-                {
-                    text.setText("Sort by Difficulty");
-                    sortMode = false;
-                }
-                else
-                {
-                    text.setText("Sort by Date Created");
-                    sortMode = true;
-                }
-                toast.show();
-
-
-            }
-        });
 
         /*NEW CLASS BUTTON*/
         ImageButton newClassButton = (ImageButton) findViewById(R.id.newClass);

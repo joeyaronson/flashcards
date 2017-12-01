@@ -72,27 +72,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@mipmap/deletebutton"
-        app:layout_constraintRight_toLeftOf="@+id/sortButton"
+        app:layout_constraintRight_toLeftOf="@+id/newClass"
         android:layout_marginRight="8dp"
         app:layout_constraintHorizontal_bias="1.0" />
-
-    <ImageButton
-        android:id="@+id/sortButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@mipmap/sortbutton"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/newClass"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@mipmap/sortbutton" />
 
     <ImageButton
         android:id="@+id/help"

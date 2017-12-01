@@ -41,8 +41,8 @@
 
     <ListView
         android:id="@+id/cardList"
-        android:layout_width="286dp"
-        android:layout_height="445dp"
+        android:layout_width="321dp"
+        android:layout_height="439dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
@@ -54,11 +54,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteY="9dp" />
+        tools:layout_editor_absoluteY="14dp" />
     <TextView
         android:id="@+id/noCards"
-        android:layout_width="280dp"
-        android:layout_height="66dp"
+        android:layout_width="329dp"
+        android:layout_height="69dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
@@ -69,7 +69,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017" />
+        app:layout_constraintVertical_bias="0.016" />
 
     <ImageButton
         android:id="@+id/deleteButton"
