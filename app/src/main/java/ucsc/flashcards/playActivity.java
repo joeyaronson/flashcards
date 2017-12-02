@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class playActivity extends AppCompatActivity {
-
+    //TODO crashes when user presses x button with one card left
     public boolean isFront = true;
     public boolean setDone;
     public int i = 0;
