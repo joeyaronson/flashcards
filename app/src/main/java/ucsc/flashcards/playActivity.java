@@ -18,6 +18,7 @@ public class playActivity extends AppCompatActivity {
     public int i = 0;
     public int nextIndex = 0;
     public int initialCards;
+
     Random rand = new Random();
     SQLDataBase db;
 
@@ -95,11 +96,11 @@ public class playActivity extends AppCompatActivity {
                             }
                             card.setText(frontList.get(i));
                             progressBar.setProgress((100*diffList.size())/(initialCards*5));
-                            for(int j = 0; diffList.size() != 0 && diffList.get(j) != i; j++){
+                            for(int j = 0; diffList.size() != 0 && diffList.get(j) == i; j++){
                                 if( j == diffList.size() - 1 ){
-                                    progressBar.setProgress(0);
-                                    card.setText("Contrats! You have completed this set!");
-                                    setDone = true;
+                                    diffList.clear();
+                                    diffList.add(i);
+                                    break;
                                 }
                             }
                         } else {
@@ -108,11 +109,11 @@ public class playActivity extends AppCompatActivity {
                             card.setText("Contrats! You have completed this set!");
                             setDone = true;
                         }
-                        for(int j = 0; diffList.size() != 0 && diffList.get(j) != i; j++){
+                        for(int j = 0; diffList.size() != 0 && diffList.get(j) == i; j++){
                             if( j == diffList.size() - 1 ){
-                                progressBar.setProgress(0);
-                                card.setText("Contrats! You have completed this set!");
-                                setDone = true;
+                                diffList.clear();
+                                diffList.add(i);
+                                break;
                             }
                         }
                     } else {
@@ -128,7 +129,7 @@ public class playActivity extends AppCompatActivity {
                             }
                             progressBar.setProgress((100*frontList.size())/initialCards);
                             card.setText(frontList.get(i));
-                            //count.setText((i+1) +"/"+frontList.size());
+                            //count.setText((i+1) +"/"+frontList.size())
                         } else {
                             //count.setText("0/0");
                             progressBar.setProgress(0);
@@ -163,13 +164,27 @@ public class playActivity extends AppCompatActivity {
                     }
                     if(frontList.size() > 1){
                         if( sortMode ){
-                            if( diffList.size() > 1 ){
+                            if (diffList.size() > 1) {
                                 nextIndex = diffList.get(rand.nextInt(diffList.size()));
-                                while( i == nextIndex ){
-                                    nextIndex = diffList.get(rand.nextInt(diffList.size()));
+                                if(i == nextIndex){
+                                    boolean allTheSameCard = false;
+                                    for(int j = 0; diffList.size() != 0 && diffList.get(j) == nextIndex; j++){
+                                        if( j >= diffList.size() - 1 ){
+                                            diffList.clear();
+                                            diffList.add(i);
+                                            allTheSameCard = true;
+                                            break;
+                                        }
+                                    }
+                                    if( !allTheSameCard ){
+                                        while (i == nextIndex) {
+                                            nextIndex = diffList.get(rand.nextInt(diffList.size()));
+                                        }
+                                    }
+
                                 }
                                 i = nextIndex;
-                                progressBar.setProgress((100*diffList.size())/(initialCards*5));
+                                progressBar.setProgress((100 * diffList.size()) / (initialCards * 5));
                             }
                         } else {
                             nextIndex = rand.nextInt(frontList.size());
