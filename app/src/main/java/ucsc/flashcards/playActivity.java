@@ -52,9 +52,6 @@ public class playActivity extends AppCompatActivity {
         card.setText(frontList.get(i));
         card.setMovementMethod(new ScrollingMovementMethod());
 
-        //final TextView count = (TextView) findViewById(R.id.countText);
-
-        //count.setText((i+1)+"/"+frontList.size());
 
         card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,9 +81,7 @@ public class playActivity extends AppCompatActivity {
                 if(!setDone) {
                     db.changeDiff(true, cardIDList.get(i));
                     if(sortMode) {
-                        //if(diffList.size() > 0){
-                            diffList.remove((Integer)i);
-                        //}
+                        diffList.remove((Integer)i);
                         if(diffList.size() > 0)
                         {
                             if(diffList.size() > 1) {
@@ -162,16 +157,20 @@ public class playActivity extends AppCompatActivity {
                 {
 
                     if( db.changeDiff(false, cardIDList.get(i)) ){
-                        diffList.add(i);
+                        if( diffList.size() > 1 ){
+                            diffList.add(i);
+                        }
                     }
                     if(frontList.size() > 1){
                         if( sortMode ){
-                            nextIndex = diffList.get(rand.nextInt(diffList.size()));
-                            while( i == nextIndex ){
+                            if( diffList.size() > 1 ){
                                 nextIndex = diffList.get(rand.nextInt(diffList.size()));
+                                while( i == nextIndex ){
+                                    nextIndex = diffList.get(rand.nextInt(diffList.size()));
+                                }
+                                i = nextIndex;
+                                progressBar.setProgress((100*diffList.size())/(initialCards*5));
                             }
-                            i = nextIndex;
-                            progressBar.setProgress((100*diffList.size())/(initialCards*5));
                         } else {
                             nextIndex = rand.nextInt(frontList.size());
                             while(i == nextIndex){
@@ -182,17 +181,6 @@ public class playActivity extends AppCompatActivity {
                         }
                     }
                     card.setText(frontList.get(i));
-                    /* if(i < frontList.size()-1)
-                    {
-                        i++;
-                        card.setText(frontList.get(i));
-                    }
-                    else
-                    {
-                        i = 0;
-                        card.setText(frontList.get(i));
-                    } */
-
                     //count.setText((i+1) +"/"+frontList.size());
                 } else {
                     finish();
